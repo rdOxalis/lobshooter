@@ -1,0 +1,33 @@
+INSTALL
+-------
+
+This is a short description of how to get oraload up and running. 
+Since I have made no release yet, please do not expect too much.
+
+Prerequisites:
+
+You need a working Oracle-Install, i.e
+
+- Oracle Server 
+- Oracle Client (you may compile the sources, of course you need a server somewhere to get it to work)
+- Oracle XE
+
+You need cmake for the build process. Try "apt-cache search cmake" and then install from your Debian-Repositories. 
+(Other OS I do not know yet)
+
+The build-process:
+CD to the source directory and type 
+
+cmake .
+make all
+make install (as root). 
+
+That's all.
+
+Test it :
+Type "oraload", this will give you a short description of command-line options.
+
+
+
+
+
