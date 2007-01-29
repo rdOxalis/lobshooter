@@ -1,4 +1,4 @@
-# Install script for directory: /home/ralf/working_copy/svnroot/lib
+# Install script for directory: /home/ralf/01Projekte/working_copy/oraload/lib
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -27,4 +27,4 @@ IF(NOT CMAKE_INSTALL_COMPONENT)
   ENDIF(COMPONENT)
 ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
-FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/ralf/working_copy/svnroot/lib/libloadutil.so")
+FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/ralf/01Projekte/working_copy/oraload/lib/libloadutil.so")

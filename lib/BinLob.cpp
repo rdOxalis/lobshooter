@@ -26,7 +26,8 @@ int BinLob::DownloadBlobData(void){
     unsigned int bufsize=4000000;
     unsigned char* buffer = new unsigned char[bufsize + 1];
     //char* buffer = new char[bufsize + 1];
-    memset(buffer,NULL,bufsize);
+    //memset(buffer,NULL,bufsize);
+    memset(buffer,0,bufsize);
     ofstream ofFile;
       ofFile.open((const char*)filename.c_str(),ios_base::binary);
     
@@ -130,7 +131,8 @@ int BinLob::UploadBlobData(void){
       {
         Blob blob = rset->getBlob(1);
         Stream *strm=blob.getStream();
-        memset (buffer, NULL, bufsize);
+        //memset (buffer, NULL, bufsize);
+        memset(buffer,0,bufsize);
         inFile.read(buffer,bufsize);
         strm->writeBuffer(buffer,bufsize);
         strcpy(buffer,"");

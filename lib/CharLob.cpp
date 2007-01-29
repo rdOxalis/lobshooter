@@ -99,7 +99,8 @@ int CharLob::UploadClobData(void){
       {
         Clob clob = rset->getClob(1);
         Stream *strm=clob.getStream();
-        memset (buffer, NULL, bufsize);
+        //memset (buffer, NULL, bufsize);
+        memset (buffer, 0, bufsize);
         inFile.read(buffer,bufsize);
         strm->writeBuffer(buffer,bufsize);
         strcpy(buffer,"");
