@@ -24,7 +24,7 @@ CharLob::CharLob (char* user , char* pass , char* db)
 
 int CharLob::DownloadClobData(void){
   if (this->getConnectorType() == "Oracle"){
-    unsigned int bufsize=4000000;
+    unsigned int bufsize=9999999;
     char* buffer = new char[bufsize + 1];
     
     ofstream ofFile;
