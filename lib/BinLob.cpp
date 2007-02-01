@@ -23,7 +23,7 @@ BinLob::BinLob (char* user , char* pass , char* db)
 
 int BinLob::DownloadBlobData(void){
   if (this->getConnectorType() == "Oracle"){
-    unsigned int bufsize=4000000;
+    unsigned int bufsize=9999999;
     unsigned char* buffer = new unsigned char[bufsize + 1];
     //char* buffer = new char[bufsize + 1];
     //memset(buffer,NULL,bufsize);
