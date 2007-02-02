@@ -14,6 +14,60 @@
 //  23.01.2007 usage
 // ************************************************
 
+/*! \mainpage LobShooter for Oracle (oraload)
+ *
+ * \section intro_sec Introduction
+ *
+ * LobShooter for Oracle (oraload) is a utility to easily up- and download Lob-Files 
+ * to and from an Oracle database. You are able to directly load binary (blob) and char data with it.
+ * oraload comes with a library (libloadutil) and the main program.
+ * For the moment oraload is a command line utility, that takes parameters like this
+ *
+ * oraload user pass db DC|UC|DB|UB SqlString filename [logfile]
+ *
+ *
+ *  , where 
+ *
+ *  - user = database user
+ *  - pass = database password
+ *  - db   = database tnsname
+ *  - DC   = Download a char lob
+ *  - UC   = Upload a char lob
+ *  - DB   = Download a bin lob
+ *  - UB   = Upload a bin lob
+ *  - SqlString = the sql which sais where to put the lob (or where to get it from)
+ *  - filename = the filename for input or output (the file that you want to make a database lob from)
+ *  - logfile = path to the file where oraload should put the logging infos.
+ *
+ * \section install_sec Installation
+ * Prerequisites:
+ * 
+ * You need a working Oracle-Install, i.e
+ *
+ * - Oracle Server 
+ * - Oracle Client (you may compile the sources, of course you need a server somewhere to get it to work)
+ * - Oracle XE
+ * - Oracle Instant Client
+ *
+ * You need cmake for the build process. Try "apt-cache search cmake" and then install from your Debian-Repositories. 
+ *
+ * The build-process:
+ * - CD to the source directory and type 
+ * - cmake .  (that is a dot here)
+ * - make all
+ * - make install (as root). 
+ *
+ * \subsection Examples
+ * oraload hr hr xe UB "select blob_field from blob_table where pk_field = 4711 for update" music.mp3
+ *
+ * - note that you always have to lock the row with "for update", if you upload something. You do not 
+ *   need that when downloading.
+ *
+ * \subsection Using Using the library
+ * You can use the library to implement in your own programs. A good starting point is the test-directory
+ * with the unit test sources. For a better understanding of classes and methods continue reading this documentation 
+ */
+
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
