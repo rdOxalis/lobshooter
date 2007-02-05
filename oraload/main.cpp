@@ -39,6 +39,10 @@
  *  - filename = the filename for input or output (the file that you want to make a database lob from)
  *  - logfile = path to the file where oraload should put the logging infos.
  *
+ * \section Download
+ * Download from 
+ * - http://sourceforge.net/projects/oraload/
+ *
  * \section install_sec Installation
  * Prerequisites:
  * 
