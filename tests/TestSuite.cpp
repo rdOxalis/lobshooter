@@ -11,7 +11,7 @@ class TestSuite : public CppUnit::TestFixture
   CPPUNIT_TEST_SUITE( TestSuite );
   //CPPUNIT_TEST( runConnTest );
   //CPPUNIT_TEST( runBasicDMLTest );
-  //CPPUNIT_TEST( runCharLobTest_Upload );
+  CPPUNIT_TEST( runCharLobTest_Upload );
   CPPUNIT_TEST( runBinLobTest_Upload );
   //CPPUNIT_TEST( runMiscTest );
   CPPUNIT_TEST_SUITE_END();
@@ -105,7 +105,7 @@ void runBasicDMLTest(void)
 void runCharLobTest_Upload(void) 
 {
   // Upload of CharData
-  CharLob CL("hr","hr","xe");
+  CharLob CL("hr","hr","//lynx:1521/xe");
   CL.connect();
   CL.setSQLStmt("drop table TestSuiteCL");
   CL.InsertRow();
@@ -133,7 +133,7 @@ void runCharLobTest_Upload(void)
   CL.setSqlLocator(Loc);
   CL.UploadClobData();
   CL.setSQLStmt("select id,dbms_lob.getlength(flob) from TestSuiteCL where id = 2") ;
-  erg = CL.displayRows(2,0);
+  erg = CL.displayRows(2,0);https://oraload.svn.sourceforge.net/svnroot/oraload
   //CPPUNIT_ASSERT( erg == "2|39455|");    
 
   CL.setFilename("TestSuiteCL.clob.1.OUT");
@@ -151,7 +151,7 @@ void runCharLobTest_Upload(void)
 void runBinLobTest_Upload(void) 
 {
   // Upload of CharData
-  BinLob BL("hr","hr","xe");
+  BinLob BL("hr","hr","//lynx:1521/xe");
   BL.connect();
   BL.setSQLStmt("drop table TestSuiteBL");
   BL.InsertRow();
