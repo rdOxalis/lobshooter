@@ -37,12 +37,17 @@ The build-process:<ul>
 <li>CD to the source directory and type</li><li>cmake . (that is a dot here)</li><li>make all</li><li>make install (as root).</li></ul>
 <h3><a class="anchor" name="Examples">
 Examples</a></h3>
-oraload hr hr xe UB "select blob_field from blob_table where pk_field = 4711 for update" music.mp3<p>
+<ul>
+<li>oraload hr hr xe UB "select blob_field from blob_table where pk_field = 4711 for update" music.mp3</li></ul>
+<p>
 <ul>
 <li>note that you always have to lock the row with "for update", if you upload something. You do not need that when downloading.</li></ul>
+<p>
+Example with EasyConnect (e.g. if you have InstantClient and no TNSNAMES.ora)<ul>
+<li>oraload hr hr //lynx:1521/xe DC "select blob_field from blob_table where pk_field = 4711" music.mp3 ./log.txt</li></ul>
 <h3><a class="anchor" name="Using">
 Using the library</a></h3>
-You can use the library to implement in your own programs. A good starting point is the test-directory with the unit test sources. For a better understanding of classes and methods continue reading this documentation <hr size="1"><address style="align: right;"><small>Generated on Mon Feb 5 07:32:29 2007 for LobShooter for Oracle (oraload) by&nbsp;
+You can use the library to implement in your own programs. A good starting point is the test-directory with the unit test sources. For a better understanding of classes and methods continue reading this documentation <hr size="1"><address style="align: right;"><small>Generated on Sun Feb 11 18:00:00 2007 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>
