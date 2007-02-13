@@ -43,7 +43,8 @@ int Conn::connect(void)
       conn = env->createConnection (username, password, url);
     }
     catch(SQLException e){
-      cout << e.getMessage() << endl;   //FIXME Produces *** glibc detected *** free(): invalid pointer: 0x0806be30 ***
+      cout << e.getMessage() << endl;  
+      //FIXME Produces *** glibc detected *** free(): invalid pointer: 0x0806be30 ***
       // Fixes with MALLOC_CHECK_=0;export MALLOC_CHECK on the cmdline
       return(-1);
     }

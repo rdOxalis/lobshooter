@@ -21,10 +21,14 @@ CharLob::CharLob (char* user , char* pass , char* db)
    url = db;
 }
 
+CharLob::~CharLob ()
+{
+   cout << "Destroy";
+}
 
 int CharLob::DownloadClobData(void){
   if (this->getConnectorType() == "Oracle"){
-    unsigned int bufsize=9999999;
+    unsigned int bufsize=10000;
     char* buffer = new char[bufsize + 1];
     
     ofstream ofFile;
@@ -39,12 +43,23 @@ int CharLob::DownloadClobData(void){
     try{
         Statement *stmt = conn->createStatement(sqlLocator);
         ResultSet *rset = stmt->executeQuery();
-        cout << "got ResultSet" << endl;
+        cout << "Got ResultSet" << endl;
         while(rset->next())
         {
           Clob clob = rset->getClob(1);
           Stream *strm=clob.getStream();
-          strm->readBuffer(buffer,clob.length());
+          
+          //strm->readBuffer(buffer,clob.length());
+          int bytesRead = strm->readBuffer((char*)buffer,200);
+          while (bytesRead>0)
+          {
+            for (int i=0;i<bytesRead;++i)
+            {
+              ofFile << buffer[i];
+            }
+            bytesRead = strm->readBuffer((char*)buffer,200);
+          }
+          
           clob.closeStream(strm);
           ofFile << buffer;
           ofFile.close();
@@ -52,7 +67,8 @@ int CharLob::DownloadClobData(void){
         }
     }
     catch (SQLException e){
-      cout << e.getMessage();
+      cout << e.getMessage() << endl;
+      delete[] buffer;
       return(-3);
     }
     return(0);
@@ -61,8 +77,7 @@ int CharLob::DownloadClobData(void){
 
 int CharLob::UploadClobData(void){
   if (this->getConnectorType() == "Oracle"){
-    // Uses stream here
-    cout << "Populating the Clob using writeBuffer(Stream) method" << endl;
+    cout << "Populating the Clob" << endl;
     
     ifstream countFile;
     countFile.open((const char*)filename.c_str(),ios_base::in);
@@ -87,7 +102,6 @@ int CharLob::UploadClobData(void){
     // abcdefg[eof][aktuelle pos]  , daher -2
     unsigned int bufsize=i-2;//sizeof(char);
     char* buffer = new char[bufsize];
-    //cout << "Gr�e des Files ist " << bufsize << endl;
         
     unsigned int size;
     try{
@@ -118,6 +132,7 @@ int CharLob::UploadClobData(void){
     }
     catch(SQLException e){
       cout <<e.getMessage();
+      delete[] buffer;
       return (-2);
     }
     return(0);

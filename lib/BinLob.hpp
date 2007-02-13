@@ -29,6 +29,7 @@ class  BinLob:public Lob
   public:
   BinLob (char* user , char* pass , char* db, char* cfile);
   BinLob (char* user , char* pass , char* db);
+  ~BinLob();
   int DownloadBlobData(void);
   int UploadBlobData(void);
 };//end of class

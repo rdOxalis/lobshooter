@@ -29,6 +29,7 @@ class CharLob:public Lob
   public:
   CharLob (char* user , char* pass , char* db, char* cfile);
   CharLob (char* user , char* pass , char* db);
+  ~CharLob ();
   int DownloadClobData(void);
   int UploadClobData(void);
 

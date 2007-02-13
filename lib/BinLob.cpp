@@ -21,12 +21,15 @@ BinLob::BinLob (char* user , char* pass , char* db)
    url = db;
 }
 
+BinLob::~BinLob ()
+{
+   cout << "Destroy";
+}
+
 int BinLob::DownloadBlobData(void){
   if (this->getConnectorType() == "Oracle"){
-    unsigned int bufsize=9999999;
+    unsigned int bufsize=10000;
     unsigned char* buffer = new unsigned char[bufsize + 1];
-    //char* buffer = new char[bufsize + 1];
-    //memset(buffer,NULL,bufsize);
     memset(buffer,0,bufsize);
     ofstream ofFile;
       ofFile.open((const char*)filename.c_str(),ios_base::binary);
@@ -40,7 +43,7 @@ int BinLob::DownloadBlobData(void){
     try{
         Statement *stmt = conn->createStatement(sqlLocator);
         ResultSet *rset = stmt->executeQuery();
-        cout << "ResultSet bekommen." << endl;
+        cout << "Got ResultSet." << endl;
         while(rset->next())
         {
           Blob blob = rset->getBlob(1);
@@ -59,25 +62,12 @@ int BinLob::DownloadBlobData(void){
           ofFile.close();
           cout << "Getting the Blob - Success" << endl;
         }
-/*          Statement *stmt = conn->createStatement(sqlLocator);
-        cout << sqlLocator << endl;
-        stmt->executeQuery();
-        cout << "ResultSet bekommen."<< endl;
-        Blob blob(conn);
-        cout << "110" << endl;
-        cout << stmt->getSQL()<<endl;
-        blob = stmt->getBlob((unsigned int)1);
-        cout << "110" << endl;
-        int bytesRead = (blob.read(blob.length(),buffer,blob.length(),1));
-        for (int i=0;i<bytesRead;++i){
-          ofFile << (int)buffer[i];
-        }
-        cout << "Getting the Blob - Success" << endl;
-        ofFile.close();
-*/  
+        free(buffer);
+
     }
     catch (SQLException e){
       cout << e.getMessage();
+      free(buffer);
       return(-3);
     }
     return(0);
@@ -89,7 +79,6 @@ int BinLob::UploadBlobData(void){
     // Uses stream here
     cout << "Populating the Blob" << endl;
 
-    // ---------------------------------------------------------------------
     ifstream countFile;
     countFile.open((const char*)filename.c_str(),ios_base::binary|ios_base::in);
     if (!countFile)
@@ -106,7 +95,6 @@ int BinLob::UploadBlobData(void){
       countFile.ignore();
     }
     countFile.close();
-    // ---------------------------------------------------------------------
 
     //unsigned int bufsize=sizeof(char);
     //char* buffer = new char[bufsize];
@@ -131,7 +119,6 @@ int BinLob::UploadBlobData(void){
       {
         Blob blob = rset->getBlob(1);
         Stream *strm=blob.getStream();
-        //memset (buffer, NULL, bufsize);
         memset(buffer,0,bufsize);
         inFile.read(buffer,bufsize);
         strm->writeBuffer(buffer,bufsize);
