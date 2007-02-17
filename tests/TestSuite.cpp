@@ -145,6 +145,19 @@ void runCharLobTest_Upload(void)
   Loc = "select flob from TestSuiteCL where id = 2";
   CL.setSqlLocator(Loc);
   CL.DownloadClobData();
+
+  // What about file not found szenarios?
+  CL.setSQLStmt("insert into TestSuiteCL values(3,empty_clob())");
+  CL.InsertRow();
+  CL.Commit();
+  CL.setFilename("File_not_there.txt");
+  Loc = "select flob from TestSuiteCL where id = 3 for update";
+  CL.setSqlLocator(Loc);
+  CL.UploadClobData();
+  CL.setFilename("File_not_there.txt.OUT");
+  Loc = "select flob from TestSuiteCL where id = 1";
+  CL.setSqlLocator(Loc);
+  CL.DownloadClobData();
 }
 
 void runFaultySql(void)
