@@ -1,8 +1,8 @@
 include_directories(${CMAKE_SOURCE_DIR}/lib)
-include_directories(/usr/lib/oracle/xe/app/oracle/product/10.2.0/server/rdbms/public)
-set(libnnz /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/lib/libnnz10.so)
-set(libocci /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/lib/libocci.so.10.1)
-set(libclntsh /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/lib/libclntsh.so.10.1)
+include_directories(${ORACLE_HOME}/rdbms/public)
+set(libnnz ${ORACLE_HOME}/lib/libnnz10.so)
+set(libocci ${ORACLE_HOME}/lib/libocci.so.10.1)
+set(libclntsh ${ORACLE_HOME}/lib/libclntsh.so.10.1)
 set(AppSrcs main.cpp)
 add_executable(oraload ${AppSrcs})
 
