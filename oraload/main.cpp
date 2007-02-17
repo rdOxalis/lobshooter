@@ -53,7 +53,14 @@
  * - Oracle XE
  * - Oracle Instant Client
  *
- * You need cmake for the build process. Try "apt-cache search cmake" and then install from your Debian-Repositories. 
+ * You need cmake for the build process. Try "apt-cache search cmake" and then install from your Debian-Repositories 
+ * or get it from cmake.org
+ * 
+ * Set your Oracle Home 
+ * 
+ * - Find the top level CMakeLists.txt (in directory oraload).
+ * - Find the line "set(ORACLE_HOME /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/)" and set the directory where your Oracle installation resides
+ * - ( for an InstantClient install this would be sth like /path/to/InstantClient_top_level_dir )
  *
  * The build-process:
  * - CD to the source directory and type 
@@ -123,6 +130,7 @@ string GetTime()
   return(string(DS));
 }
 
+// FIXME log class needed
 void FlushLogFile()
 {
   std::ofstream out(vLogFile.c_str(), std::ios_base::trunc);
@@ -146,7 +154,7 @@ int WriteLogFile(string pLog)
   return(0);
 }
 
-
+// FIXME Err-Class needed
 void CheckErr(OCIError* errhp, sword status, string mark)
 {
   text errbuf[2048];
@@ -233,7 +241,7 @@ int main(int argc, char *argv[])
     CL.connect();
     CL.setFilename(argv[6]);
     CL.setSqlLocator(argv[5]);
-    string sqlLoc(argv[5]);
+    //string sqlLoc(argv[5]);
     CL.UploadClobData();
   }
 
@@ -244,7 +252,7 @@ int main(int argc, char *argv[])
     CL.connect();
     CL.setFilename(argv[6]);
     CL.setSqlLocator(argv[5]);
-    string sqlLoc(argv[5]);
+    //string sqlLoc(argv[5]);
     CL.DownloadClobData();
   }
 
@@ -255,7 +263,7 @@ int main(int argc, char *argv[])
     BL.connect();
     BL.setFilename(argv[6]);
     BL.setSqlLocator(argv[5]);
-    string sqlLoc(argv[5]);
+    //string sqlLoc(argv[5]);
     BL.UploadBlobData();
   }
 
