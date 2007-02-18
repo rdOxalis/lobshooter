@@ -1,4 +1,4 @@
-set(ORACLE_HOME /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/)
+set(ORACLE_HOME $ENV{ORACLE_HOME})
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${ORACLE_HOME}/rdbms/public)
 set(loadutil /usr/local/lib/libloadutil.so)
