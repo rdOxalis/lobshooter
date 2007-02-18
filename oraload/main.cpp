@@ -56,11 +56,10 @@
  * You need cmake for the build process. Try "apt-cache search cmake" and then install from your Debian-Repositories 
  * or get it from cmake.org
  * 
- * Set your Oracle Home 
+ * Set your Oracle Home Environment variable 
  * 
- * - Find the top level CMakeLists.txt (in directory oraload).
- * - Find the line "set(ORACLE_HOME /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/)" and set the directory where your Oracle installation resides
- * - ( for an InstantClient install this would be sth like /path/to/InstantClient_top_level_dir )
+ * - for a standard xe install this would be /usr/lib/oracle/xe/app/oracle/product/10.2.0/server
+ * - for an InstantClient install this would be sth like /path/to/InstantClient_top_level_dir
  *
  * The build-process:
  * - CD to the source directory and type 
@@ -220,7 +219,7 @@ void Usage(char* vProg){
 
 int main(int argc, char *argv[])
 {
-  cout << argc;
+  
   if ( argc < 7 or argc > 8 ) {
     Usage(argv[0]);
     return (-1);
@@ -233,7 +232,7 @@ int main(int argc, char *argv[])
   WriteLogFile(argv[0]);
 
   int rc;
-
+  
   // Upload of CharData
   if (strcmp(argv[4],"UC") == 0
       ){

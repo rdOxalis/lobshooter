@@ -33,9 +33,9 @@ You need a working Oracle-Install, i.e<p>
 <li>Oracle Server</li><li>Oracle Client (you may compile the sources, of course you need a server somewhere to get it to work)</li><li>Oracle XE</li><li>Oracle Instant Client</li></ul>
 <p>
 You need cmake for the build process. Try "apt-cache search cmake" and then install from your Debian-Repositories or get it from cmake.org<p>
-Set your Oracle Home<p>
+Set your Oracle Home Environment variable<p>
 <ul>
-<li>Find the top level CMakeLists.txt (in directory oraload).</li><li>Find the line "set(ORACLE_HOME /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/)" and set the directory where your Oracle installation resides</li><li>( for an InstantClient install this would be sth like /path/to/InstantClient_top_level_dir )</li></ul>
+<li>for a standard xe install this would be /usr/lib/oracle/xe/app/oracle/product/10.2.0/server</li><li>for an InstantClient install this would be sth like /path/to/InstantClient_top_level_dir</li></ul>
 <p>
 The build-process:<ul>
 <li>CD to the source directory and type</li><li>cmake . (that is a dot here)</li><li>make all</li><li>make install (as root).</li></ul>
@@ -51,7 +51,7 @@ Example with EasyConnect (e.g. if you have InstantClient and no TNSNAMES.ora)<ul
 <li>oraload hr hr //lynx:1521/xe DC "select blob_field from blob_table where pk_field = 4711" music.mp3 ./log.txt</li></ul>
 <h3><a class="anchor" name="Using">
 Using the library</a></h3>
-You can use the library to implement in your own programs. A good starting point is the test-directory with the unit test sources. For a better understanding of classes and methods continue reading this documentation <hr size="1"><address style="align: right;"><small>Generated on Sat Feb 17 17:31:33 2007 for LobShooter for Oracle (oraload) by&nbsp;
+You can use the library to implement in your own programs. A good starting point is the test-directory with the unit test sources. For a better understanding of classes and methods continue reading this documentation <hr size="1"><address style="align: right;"><small>Generated on Sun Feb 18 08:54:21 2007 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>
