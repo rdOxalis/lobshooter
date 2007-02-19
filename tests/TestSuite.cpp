@@ -11,8 +11,8 @@ class TestSuite : public CppUnit::TestFixture
   CPPUNIT_TEST_SUITE( TestSuite );
   //CPPUNIT_TEST( runConnTest );
   //CPPUNIT_TEST( runBasicDMLTest );
-  CPPUNIT_TEST( runCharLobTest_Upload );
-  CPPUNIT_TEST( runBinLobTest_Upload );
+  CPPUNIT_TEST( runCharLobTest );
+  CPPUNIT_TEST( runBinLobTest );
   //CPPUNIT_TEST( runFaultySql );
   //CPPUNIT_TEST( runMiscTest );
   CPPUNIT_TEST_SUITE_END();
@@ -102,7 +102,7 @@ void runBasicDMLTest(void)
 }
 
 // Class CharLob
-void runCharLobTest_Upload(void) 
+void runCharLobTest(void) 
 {
   // Upload of CharData
   CharLob CL("hr","hr","//lynx:1521/xe");
@@ -172,9 +172,8 @@ void runFaultySql(void)
 }
 
 // Class BinLob
-void runBinLobTest_Upload(void) 
+void runBinLobTest(void) 
 {
-  // Upload of CharData
   BinLob BL("hr","hr","//lynx:1521/xe");
   BL.connect();
   BL.setSQLStmt("drop table TestSuiteBL");
@@ -214,6 +213,32 @@ void runBinLobTest_Upload(void)
   BL.setSqlLocator(Loc);
   BL.DownloadBlobData();
  
+}
+
+void runBinLobTest_MultipleFiles(void)
+{
+  BinLob BL("hr","hr","//lynx:1521/xe");
+  BL.connect();
+  BL.setSQLStmt("drop table TestSuiteBL");
+  BL.InsertRow();
+  BL.setSQLStmt("create table TestSuiteBL (id number, flob blob)");
+  BL.InsertRow();
+  BL.setSQLStmt("insert into TestSuiteBL values(1,empty_blob())");
+  BL.InsertRow();
+  BL.Commit();
+  BL.setFilename("TestSuiteBL.blob");
+  string Loc("select flob from TestSuiteBL where id = 1 for update");
+  BL.setSqlLocator(Loc);
+  BL.UploadBlobData();
+  BL.setSQLStmt("insert into TestSuiteBL values(2,empty_blob())");
+  BL.InsertRow();
+  BL.Commit();
+  BL.setFilename("TestSuiteBL.blob.2");
+  Loc="select flob from TestSuiteBL where id = 2 for update";
+  BL.setSqlLocator(Loc);
+  BL.UploadBlobData();
+
+
 }
 
 /*

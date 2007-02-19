@@ -1,4 +1,7 @@
 #include "CharLob.hpp"
+CharLob::CharLob ()
+{
+}
 
 CharLob::CharLob (char* user , char* pass , char* db, char* cfile)
 {

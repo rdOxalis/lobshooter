@@ -27,6 +27,7 @@ using namespace std;
 class  BinLob:public Lob
 {
   public:
+  BinLob ();
   BinLob (char* user , char* pass , char* db, char* cfile);
   BinLob (char* user , char* pass , char* db);
   ~BinLob();

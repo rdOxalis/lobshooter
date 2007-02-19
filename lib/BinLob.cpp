@@ -1,5 +1,9 @@
 #include "BinLob.hpp"
 
+BinLob::BinLob ()
+{
+}
+
 BinLob::BinLob (char* user , char* pass , char* db, char* cfile)
 {
   /**

@@ -27,6 +27,7 @@ class CharLob:public Lob
 {
 
   public:
+  CharLob ();
   CharLob (char* user , char* pass , char* db, char* cfile);
   CharLob (char* user , char* pass , char* db);
   ~CharLob ();

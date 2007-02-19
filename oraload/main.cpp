@@ -96,6 +96,7 @@ using namespace std;
 
 using namespace oracle::occi;
 
+static string const VERSION("0.1.1");
 
 static OCIEnv        *envhp;
 static OCIError      *errhp;
@@ -105,6 +106,8 @@ static OCISession    *authp = (OCISession *) 0;
 static OCIStmt       *stmthp;
 static sword         rc;
 static string        vLogFile("/tmp/oraload.log");
+
+int multifile = 0;
 
 //  ************************************************
 //  function GetTime:
@@ -210,9 +213,12 @@ void CheckErr(OCIError* errhp, sword status, string mark)
   }
 }
 
+void Version(){
+ cout << "oraload." << VERSION << endl;
+}
 
 void Usage(char* vProg){
- cout << "Usage: " << vProg << " user pass db DC|UC|DB|UB SqlString filename [logfile]" << endl;
+ cout << "Usage: " << vProg << " user pass db DC|UC|DB|UB SqlString filename [options]" << endl;
  cout << "                  " << " DC:Download Clob     UC:Upload Clob" << endl;
  cout << "                  " << " DB:Download Blob     UB:Upload Blob" << endl;
 }
@@ -220,60 +226,80 @@ void Usage(char* vProg){
 int main(int argc, char *argv[])
 {
   
-  if ( argc < 7 or argc > 8 ) {
+  if ( strcmp(argv[1],"-v") == 0 or strcmp(argv[1],"--version") == 0 ) {
+    Version();
+    return (1);
+  }
+
+  if ( argc < 7 ) {
     Usage(argv[0]);
     return (-1);
   }
-  if ( argc == 8 ) {
-    vLogFile.assign(argv[7]);
+
+  char* option;
+  if(argc>7) {
+    for(int i=7;i<argc;i++) {
+      option=argv[i];
+      if(!strcmp(option,"-l")){
+        // Assign Log to different location
+        i++;
+        if ( argc < (i+1) ) {
+          Usage(argv[0]);
+          return (-1);
+        }
+        vLogFile.assign(argv[i]);
+      }
+      else if(!strcmp(option,"-h")) {
+        Usage(argv[0]);
+        return (1);
+      }
+      else if(!strcmp(option,"-m")) {
+        // Multi File Load
+        multifile = 1;
+      }
+      else {
+        Usage(argv[0]);
+        return (1);
+      }
+    }
   }
 
   FlushLogFile();
   WriteLogFile(argv[0]);
-
-  int rc;
   
+  //CharLob *CL = new CharLob();
+  //BinLob  *BL = new BinLob();
+  CharLob *CL;
+  BinLob  *BL;
+
+  if ( (strcmp(argv[4],"UC") == 0) or (strcmp(argv[4],"DC") == 0) ){
+    CL = new CharLob(argv[1],argv[2],argv[3]);
+    CL->connect();
+    CL->setFilename(argv[6]);
+    CL->setSqlLocator(argv[5]);
+  }
+  if ( (strcmp(argv[4],"UB") == 0) or (strcmp(argv[4],"DB") == 0) ){
+    BL = new BinLob(argv[1],argv[2],argv[3]);
+    BL->connect();
+    BL->setFilename(argv[6]);
+    BL->setSqlLocator(argv[5]);
+  }
+
   // Upload of CharData
-  if (strcmp(argv[4],"UC") == 0
-      ){
-    CharLob CL(argv[1],argv[2],argv[3]);
-    CL.connect();
-    CL.setFilename(argv[6]);
-    CL.setSqlLocator(argv[5]);
-    //string sqlLoc(argv[5]);
-    CL.UploadClobData();
+  if (strcmp(argv[4],"UC") == 0){
+    CL->UploadClobData();
   }
-
   // Download of CharData
-  if (strcmp(argv[4],"DC") == 0
-      ){
-    CharLob CL(argv[1],argv[2],argv[3]);
-    CL.connect();
-    CL.setFilename(argv[6]);
-    CL.setSqlLocator(argv[5]);
-    //string sqlLoc(argv[5]);
-    CL.DownloadClobData();
+  if (strcmp(argv[4],"DC") == 0){
+    CL->DownloadClobData();
   }
-
   // Upload of BinData
-  if (strcmp(argv[4],"UB") == 0
-      ){
-    BinLob BL(argv[1],argv[2],argv[3]);
-    BL.connect();
-    BL.setFilename(argv[6]);
-    BL.setSqlLocator(argv[5]);
-    //string sqlLoc(argv[5]);
-    BL.UploadBlobData();
+  if (strcmp(argv[4],"UB") == 0){
+    BL->UploadBlobData();
   }
-
   // Download of BinData
-  if (strcmp(argv[4],"DB") == 0
-      ){
-    BinLob BL(argv[1],argv[2],argv[3]);
-    BL.connect();
-    BL.setFilename(argv[6]);
-    BL.setSqlLocator(argv[5]);
-    BL.DownloadBlobData();
+  if (strcmp(argv[4],"DB") == 0){
+    BL->DownloadBlobData();
   }
 
 
