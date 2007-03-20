@@ -96,7 +96,7 @@ using namespace std;
 
 using namespace oracle::occi;
 
-static string const VERSION("0.1.1");
+static string const VERSION("0.1.2");
 
 static OCIEnv        *envhp;
 static OCIError      *errhp;
@@ -221,12 +221,15 @@ void Usage(char* vProg){
  cout << "Usage: " << vProg << " user pass db DC|UC|DB|UB SqlString filename [options]" << endl;
  cout << "                  " << " DC:Download Clob     UC:Upload Clob" << endl;
  cout << "                  " << " DB:Download Blob     UB:Upload Blob" << endl;
-}
+ cout << "Options: " << endl;
+ cout << "-l logfile_name      Assign Log File Name (default /tmp/oraload.log) " << endl;
+ cout << "-v                   Show version number " << endl;
+ cout << "-m                   MultiFile Load (experimental) " << endl;
+ }
 
 int main(int argc, char *argv[])
 {
-  
-  if ( strcmp(argv[1],"-v") == 0 or strcmp(argv[1],"--version") == 0 ) {
+  if ( argc == 2 and ( strcmp(argv[1],"-v") == 0 or strcmp(argv[1],"--version") == 0 )  ) {
     Version();
     return (1);
   }
