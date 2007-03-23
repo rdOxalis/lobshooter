@@ -23,7 +23,7 @@
  * oraload comes with a library (libloadutil) and the main program.
  * For the moment oraload is a command line utility, that takes parameters like this
  *
- * oraload user pass db DC|UC|DB|UB SqlString filename [logfile]
+ * oraload user pass db DC|UC|DB|UB SqlString filename [options]
  *
  *
  *  , where 
@@ -37,7 +37,11 @@
  *  - UB   = Upload a bin lob
  *  - SqlString = the sql which sais where to put the lob (or where to get it from)
  *  - filename = the filename for input or output (the file that you want to make a database lob from)
- *  - logfile = path to the file where oraload should put the logging infos.
+ * 
+ *  Options
+ *  - -l logfile_name = path to the file where oraload should put the logging infos.
+ *  - -v show version number
+ *  - -m multiple file load (experimental)
  *
  * \section Download
  * Download from 
@@ -67,6 +71,12 @@
  * - make all
  * - make install (as root). 
  *
+ * On runtime, set your library path like this:
+ * 
+ * - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib:$ORACLE_HOME/ctx/lib
+ * - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib
+ * - export LD_LIBRARY_PATH
+ * 
  * \subsection Examples
  * - oraload hr hr xe UB "select blob_field from blob_table where pk_field = 4711 for update" music.mp3
  *
