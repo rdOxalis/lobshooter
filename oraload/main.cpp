@@ -41,7 +41,6 @@
  *  Options
  *  - -l logfile_name = path to the file where oraload should put the logging infos.
  *  - -v show version number
- *  - -m multiple file load (experimental)
  *
  * \section Download
  * Download from 
@@ -234,7 +233,6 @@ void Usage(char* vProg){
  cout << "Options: " << endl;
  cout << "-l logfile_name      Assign Log File Name (default /tmp/oraload.log) " << endl;
  cout << "-v                   Show version number " << endl;
- cout << "-m                   MultiFile Load (experimental) " << endl;
  }
 
 int main(int argc, char *argv[])
@@ -267,7 +265,7 @@ int main(int argc, char *argv[])
         return (1);
       }
       else if(!strcmp(option,"-m")) {
-        // Multi File Load
+        // Multi File Load, not working yet
         multifile = 1;
       }
       else {
