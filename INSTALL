@@ -3,28 +3,40 @@ INSTALL
 
 This is a short description of how to get oraload up and running. 
 
-Prerequisites:
-
-You need a working Oracle-Install, i.e
-
-- Oracle Server 
-- Oracle Client (you may compile the sources, of course you need a server somewhere to get it to work)
-- Oracle XE
-
-You need cmake for the build process. Try "apt-cache search cmake" and then install from your Debian-Repositories. 
-(Other OS I do not know yet)
-
-The build-process:
-CD to the source directory and type 
-
-cmake .
-make all
-make install (as root). 
+ * Prerequisites:
+ * 
+ * You need a working Oracle-Install, i.e
+ *
+ * - Oracle Server 
+ * - Oracle Client (you may compile the sources, of course you need a server somewhere to get it to work)
+ * - Oracle XE
+ * - Oracle Instant Client
+ *
+ * You need cmake for the build process. Try "apt-cache search cmake" and then install from your Debian-Repositories 
+ * or get it from cmake.org
+ * 
+ * Set your Oracle Home Environment variable 
+ * 
+ * - for a standard xe install this would be /usr/lib/oracle/xe/app/oracle/product/10.2.0/server
+ * - for an InstantClient install this would be sth like /path/to/InstantClient_top_level_dir
+ *
+ * The build-process:
+ * - CD to the source directory and type 
+ * - cmake .  (that is a dot here)
+ * - make all
+ * - make install (as root). 
+ *
+ * On runtime, set your library path like this:
+ * 
+ * - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib:$ORACLE_HOME/ctx/lib
+ * - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib
+ * - export LD_LIBRARY_PATH
+ * 
 
 That's all.
 
 Test it :
-Type "oraload", this will give you a short description of command-line options.
+Type "oraload -h", this will give you a short description of command-line options.
 
 
 
