@@ -83,13 +83,12 @@
  *   need that when downloading.
  * 
  * Example with EasyConnect (e.g. if you have InstantClient and no TNSNAMES.ora)
- * - oraload hr hr //lynx:1521/xe DC "select blob_field from blob_table where pk_field = 4711" music.mp3 ./log.txt
+ * - oraload hr hr //lynx:1521/xe DC "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt
  *
  * \subsection Using Using the library
  * You can use the library to implement in your own programs. A good starting point is the test-directory
  * with the unit test sources. For a better understanding of classes and methods continue reading this documentation 
  *
- * 
  */
 
 #include <iostream>
