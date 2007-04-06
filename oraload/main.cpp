@@ -104,7 +104,7 @@ using namespace std;
 
 using namespace oracle::occi;
 
-static string const VERSION("0.1.2");
+static string const VERSION("0.1.3");
 
 static OCIEnv        *envhp;
 static OCIError      *errhp;
