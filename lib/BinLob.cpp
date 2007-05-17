@@ -76,6 +76,7 @@ int BinLob::DownloadBlobData(void){
     }
     return(0);
   }
+  return(0);
 }
 
 int BinLob::UploadBlobData(void){
@@ -144,6 +145,7 @@ int BinLob::UploadBlobData(void){
     }
     return(0);
   }
+  return(0);
 }
 
 

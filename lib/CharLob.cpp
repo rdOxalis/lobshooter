@@ -64,7 +64,7 @@ int CharLob::DownloadClobData(void){
           }
           
           clob.closeStream(strm);
-          ofFile << buffer;
+          //ofFile << buffer;
           ofFile.close();
           cout << "Getting the Clob - Success" << endl;
         }
@@ -76,6 +76,7 @@ int CharLob::DownloadClobData(void){
     }
     return(0);
   }
+  return(0);
 }
 
 int CharLob::UploadClobData(void){
@@ -140,5 +141,6 @@ int CharLob::UploadClobData(void){
     }
     return(0);
   }
+  return(0);
 }
 

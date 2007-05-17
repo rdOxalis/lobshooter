@@ -17,6 +17,7 @@ int Lob::InitLob(string pField , string pTable , string pWhere){
     conn->terminateStatement (stmt);
     return(0);
   }
+  return(0);
 } // InitLob
 
 void Lob::setFilename (string f)

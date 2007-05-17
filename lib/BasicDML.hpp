@@ -20,7 +20,7 @@ class BasicDML:public Conn
   public:
   BasicDML ();
   BasicDML (string user, string pass, string db);
-  string displayRows (int selectCount,int bindCount);
+  string displayRows (int selectCount,unsigned int bindCount);
   void setSQLStmt (string s);
   void setBind(int pos, string datatype , string wert) ;
   int InsertRow(string pSql);

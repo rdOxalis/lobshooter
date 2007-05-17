@@ -50,6 +50,7 @@ int Conn::connect(void)
     }
     return(0);
   }
+  return(0);
 }
   
  

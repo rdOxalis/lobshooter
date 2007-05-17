@@ -28,18 +28,20 @@ int BasicDML::InsertRow(string pSql){
     conn->terminateStatement (stmt);
     return(0);
   }
+  return(0);
 }
 
 int BasicDML::InsertRow(void)
 {
   this->InsertRow(this->sqlStmt);
+  return(0);
 }
 
 /**
  * displaying rows from table
  * FIXME
  */
-string BasicDML::displayRows (int selectCount,int bindCount)
+string BasicDML::displayRows (int selectCount,unsigned int bindCount)
 {
   if (this->getConnectorType() == "Oracle"){
     string ret; 
@@ -82,6 +84,7 @@ string BasicDML::displayRows (int selectCount,int bindCount)
     conn->terminateStatement (stmt);
     return(ret);
   }
+  return(0);
 }
 
 

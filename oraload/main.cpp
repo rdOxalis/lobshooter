@@ -95,6 +95,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <cstdio>
+#include <time.h>
 using namespace std;
 
 // rd 111104
@@ -104,7 +105,7 @@ using namespace std;
 
 using namespace oracle::occi;
 
-static string const VERSION("0.1.3");
+static string const VERSION("0.1.4.2");
 
 static OCIEnv        *envhp;
 static OCIError      *errhp;
@@ -113,7 +114,7 @@ static OCISvcCtx     *svchp;
 static OCISession    *authp = (OCISession *) 0;
 static OCIStmt       *stmthp;
 static sword         rc;
-static string        vLogFile("/tmp/oraload.log");
+static string        vLogFile("oraload.log");
 
 int multifile = 0;
 
@@ -236,7 +237,7 @@ void Usage(char* vProg){
 
 int main(int argc, char *argv[])
 {
-  if ( argc == 2 and ( strcmp(argv[1],"-v") == 0 or strcmp(argv[1],"--version") == 0 )  ) {
+  if ( ( argc == 2) && (( (strcmp(argv[1],"-v") == 0) || (strcmp(argv[1],"--version") == 0) ))  ) {
     Version();
     return (1);
   }
@@ -282,13 +283,19 @@ int main(int argc, char *argv[])
   CharLob *CL;
   BinLob  *BL;
 
-  if ( (strcmp(argv[4],"UC") == 0) or (strcmp(argv[4],"DC") == 0) ){
+
+  if ( (strcmp(argv[4],"UC") == 0) || (strcmp(argv[4],"DC") == 0) ){
     CL = new CharLob(argv[1],argv[2],argv[3]);
-    CL->connect();
-    CL->setFilename(argv[6]);
-    CL->setSqlLocator(argv[5]);
+    if ( CL->connect() == 0 ){
+      CL->setFilename(argv[6]);
+      CL->setSqlLocator(argv[5]);
+	}
+	else{  // couldn't connect, returning -1
+		return (-9);
+	}
   }
-  if ( (strcmp(argv[4],"UB") == 0) or (strcmp(argv[4],"DB") == 0) ){
+  if ( (strcmp(argv[4],"UB") == 0) || (strcmp(argv[4],"DB") == 0) ){
+
     BL = new BinLob(argv[1],argv[2],argv[3]);
     BL->connect();
     BL->setFilename(argv[6]);
