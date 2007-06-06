@@ -121,10 +121,11 @@ using namespace std;
 #include "CharLob.hpp"
 #include "BinLob.hpp"
 #include "Log.hpp"
+#include "Lua.hpp"
 
 using namespace oracle::occi;
 
-static string const VERSION("0.1.4.3");
+static string const VERSION("0.2");
 
 static OCIEnv        *envhp;
 static OCIError      *errhp;
@@ -152,6 +153,10 @@ void Usage(char* vProg){
 
 int main(int argc, char *argv[])
 {
+  Lua LuaInterpretor;
+  LuaInterpretor.init();
+  LuaInterpretor.do_file("lib/multifile.lua");
+  LuaInterpretor.close();
 	
   	
   if ( ( argc == 2) && (( (strcmp(argv[1],"-v") == 0) || (strcmp(argv[1],"--version") == 0) ))  ) {
