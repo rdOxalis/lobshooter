@@ -117,7 +117,6 @@
 #include <time.h>
 using namespace std;
 
-// rd 111104
 #include <occi.h>
 #include "CharLob.hpp"
 #include "BinLob.hpp"
@@ -125,7 +124,7 @@ using namespace std;
 
 using namespace oracle::occi;
 
-static string const VERSION("0.1.4.2");
+static string const VERSION("0.1.4.3");
 
 static OCIEnv        *envhp;
 static OCIError      *errhp;
@@ -153,6 +152,8 @@ void Usage(char* vProg){
 
 int main(int argc, char *argv[])
 {
+	
+  	
   if ( ( argc == 2) && (( (strcmp(argv[1],"-v") == 0) || (strcmp(argv[1],"--version") == 0) ))  ) {
     Version();
     return (1);
