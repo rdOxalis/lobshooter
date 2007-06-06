@@ -14,7 +14,13 @@
 
 #include "Log.hpp"
 
-
+//  ************************************************
+//  function GetTime:
+/*!
+    gets local time.
+    \return calculated time as String Object (dd.mm.yyyy)
+*/
+// ************************************************
 string Log::GetTime()
 {
   time_t t ;

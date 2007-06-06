@@ -138,14 +138,6 @@ static string        vLogFile("oraload.log");
 
 int multifile = 0;
 
-//  ************************************************
-//  function GetTime:
-/*!
-    gets local time.
-    \return calculated time as String Object (dd.mm.yyyy)
-*/
-// ************************************************
-
 void Version(){
  cout << "oraload." << VERSION << endl;
 }
