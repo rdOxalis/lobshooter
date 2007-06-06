@@ -43,6 +43,13 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCharLob.html#782dc2fb7e93355d4eefddc3f7fce283">UploadClobData</a> (void)</td></tr>
 
 </table>
+<hr><a name="_details"></a><h2>Detailed Description</h2>
+<a class="el" href="classCharLob.html">CharLob</a><p>
+-----------<p>
+Upload and Download of Character Lobs to an Oracle Server<p>
+Author: Ralf Duenkelmann<p>
+Date : 01.06.2004 
+<p>
 <hr><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" name="39c964abe092846921a504a2e43d3e75"></a><!-- doxytag: member="CharLob::CharLob" ref="39c964abe092846921a504a2e43d3e75" args="()" -->
 <div class="memitem">
@@ -60,7 +67,7 @@
 <div class="memdoc">
 
 <p>
-
+Def Constructor 
 </div>
 </div><p>
 <a class="anchor" name="fcbb62fdb58a9a832884b4a0ac811750"></a><!-- doxytag: member="CharLob::CharLob" ref="fcbb62fdb58a9a832884b4a0ac811750" args="(char *user, char *pass, char *db, char *cfile)" -->
@@ -101,7 +108,18 @@
 <div class="memdoc">
 
 <p>
+Constructor<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>user</em>&nbsp;</td><td>name of the database user </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pass</em>&nbsp;</td><td>password of the database user </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>db</em>&nbsp;</td><td>The database alias from tnsnames </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>cfile</em>&nbsp;</td><td>filename to up- or download (full path) </td></tr>
+  </table>
+</dl>
 
+<p>
+default values of username &amp; password 
 </div>
 </div><p>
 <a class="anchor" name="2fe3ffb32ebc4ec599ceca5dd63a0d7c"></a><!-- doxytag: member="CharLob::CharLob" ref="2fe3ffb32ebc4ec599ceca5dd63a0d7c" args="(char *user, char *pass, char *db)" -->
@@ -136,7 +154,17 @@
 <div class="memdoc">
 
 <p>
+Constructor<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>user</em>&nbsp;</td><td>name of the database user </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pass</em>&nbsp;</td><td>password of the database user </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>db</em>&nbsp;</td><td>The database alias from tnsnames </td></tr>
+  </table>
+</dl>
 
+<p>
+default values of username &amp; password 
 </div>
 </div><p>
 <a class="anchor" name="69ae22169314e33adf1d77f325b90fd9"></a><!-- doxytag: member="CharLob::~CharLob" ref="69ae22169314e33adf1d77f325b90fd9" args="()" -->
@@ -155,7 +183,7 @@
 <div class="memdoc">
 
 <p>
-
+Def Constructor 
 </div>
 </div><p>
 <hr><h2>Member Function Documentation</h2>
@@ -176,6 +204,7 @@
 <div class="memdoc">
 
 <p>
+DownloadBlob Download it <dl class="return" compact><dt><b>Returns:</b></dt><dd>0 ok , -1 file open problem , -3 Oracle Error </dd></dl>
 
 </div>
 </div><p>
@@ -196,12 +225,13 @@
 <div class="memdoc">
 
 <p>
+UploadClob Upload it <dl class="return" compact><dt><b>Returns:</b></dt><dd>0 ok , -1 file open problem , -3 Oracle Error </dd></dl>
 
 </div>
 </div><p>
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>lib/<a class="el" href="CharLob_8hpp-source.html">CharLob.hpp</a><li>lib/<a class="el" href="CharLob_8cpp.html">CharLob.cpp</a></ul>
-<hr size="1"><address style="align: right;"><small>Generated on Fri Apr 6 13:32:01 2007 for LobShooter for Oracle (oraload) by&nbsp;
+<hr size="1"><address style="align: right;"><small>Generated on Wed Jun 6 11:13:38 2007 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>

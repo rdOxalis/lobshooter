@@ -17,32 +17,45 @@
     <li><a href="files.html"><span>File&nbsp;List</span></a></li>
     <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
   </ul></div>
-<h1>lib/Lob.hpp</h1><a href="Lob_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;iostream&gt;</span>
-<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;fstream&gt;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;cstdio&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;occi.h&gt;</span>
-<a name="l00006"></a>00006 <span class="keyword">using namespace </span>oracle::occi;
-<a name="l00007"></a>00007 <span class="keyword">using namespace </span>std;
-<a name="l00008"></a>00008 <span class="preprocessor">#include "<a class="code" href="BasicDML_8hpp.html">BasicDML.hpp</a>"</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#ifndef LOB_HPP</span>
-<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define LOB_HPP</span>
-<a name="l00012"></a><a class="code" href="classLob.html">00012</a> <span class="preprocessor"></span><span class="keyword">class </span><a class="code" href="classLob.html">Lob</a>:<span class="keyword">public</span> <a class="code" href="classBasicDML.html">BasicDML</a>
-<a name="l00013"></a>00013 {
-<a name="l00014"></a>00014   <span class="keyword">protected</span>:
-<a name="l00015"></a><a class="code" href="classLob.html#4fefa38d5e6c3593d9d3e32e2fd1d24d">00015</a>   string <a class="code" href="classLob.html#4fefa38d5e6c3593d9d3e32e2fd1d24d">filename</a>;
-<a name="l00016"></a><a class="code" href="classLob.html#dabad3ea948103623074dd51c6e33156">00016</a>   string <a class="code" href="classLob.html#dabad3ea948103623074dd51c6e33156">sqlLocator</a>;  <span class="comment">// The Locator string</span>
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018   <span class="keyword">public</span>:
-<a name="l00019"></a>00019   <span class="keywordtype">void</span> <a class="code" href="classLob.html#dd9e01ad9b1e1c49672f5b85f521db3a">setFilename</a> (string f);
-<a name="l00020"></a>00020     <span class="comment">// for inserting a LOB sqlLocator MUST be an select string</span>
-<a name="l00021"></a>00021     <span class="comment">// Dont forget the locking via "for update" - clause!!</span>
-<a name="l00022"></a>00022   <span class="keywordtype">void</span> <a class="code" href="classLob.html#fa2bf732c7ef0140911b8e51f7dcadd1">setSqlLocator</a> (string sl);
-<a name="l00023"></a>00023   <span class="keywordtype">int</span> <a class="code" href="classLob.html#7d49a9baac1f6cad477597a5049aa7eb">InitLob</a>(string pField , string pTable , string pWhere);
-<a name="l00024"></a>00024 };
-<a name="l00025"></a>00025 <span class="preprocessor">#endif</span>
-</pre></div><hr size="1"><address style="align: right;"><small>Generated on Fri Apr 6 13:32:01 2007 for LobShooter for Oracle (oraload) by&nbsp;
+<h1>lib/Lob.hpp</h1><a href="Lob_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//    &lt;oraload - loads and gets lobs (Large Objects) into and out of an Oracle Database&gt; </span>
+<a name="l00002"></a>00002 <span class="comment">//    Copyright (C) &lt;2004-2007&gt; &lt;Ralf Duenkelmann&gt;</span>
+<a name="l00003"></a>00003 <span class="comment">//</span>
+<a name="l00004"></a>00004 <span class="comment">//    This library is free software; you can redistribute it and/or modify it under the terms of the </span>
+<a name="l00005"></a>00005 <span class="comment">//    GNU Lesser General Public License as published by the Free Software Foundation; </span>
+<a name="l00006"></a>00006 <span class="comment">//    either version 2.1 of the License, or (at your option) any later version.</span>
+<a name="l00007"></a>00007 <span class="comment">//</span>
+<a name="l00008"></a>00008 <span class="comment">//    This library is distributed in the hope that it will be useful, </span>
+<a name="l00009"></a>00009 <span class="comment">//    but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS </span>
+<a name="l00010"></a>00010 <span class="comment">//    FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.</span>
+<a name="l00011"></a>00011 <span class="comment">//</span>
+<a name="l00012"></a>00012 <span class="comment">//    You should have received a copy of the GNU Lesser General Public License along with this library; </span>
+<a name="l00013"></a>00013 <span class="comment">//    if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;fstream&gt;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;cstdio&gt;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;occi.h&gt;</span>
+<a name="l00020"></a>00020 <span class="keyword">using namespace </span>oracle::occi;
+<a name="l00021"></a>00021 <span class="keyword">using namespace </span>std;
+<a name="l00022"></a>00022 <span class="preprocessor">#include "<a class="code" href="BasicDML_8hpp.html">BasicDML.hpp</a>"</span>
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="preprocessor">#ifndef LOB_HPP</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">#define LOB_HPP</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span>
+<a name="l00036"></a><a class="code" href="classLob.html">00036</a> <span class="keyword">class </span><a class="code" href="classLob.html">Lob</a>:<span class="keyword">public</span> <a class="code" href="classBasicDML.html">BasicDML</a>
+<a name="l00037"></a>00037 {
+<a name="l00038"></a>00038   <span class="keyword">protected</span>:
+<a name="l00039"></a><a class="code" href="classLob.html#4fefa38d5e6c3593d9d3e32e2fd1d24d">00039</a>   string <a class="code" href="classLob.html#4fefa38d5e6c3593d9d3e32e2fd1d24d">filename</a>;
+<a name="l00040"></a><a class="code" href="classLob.html#dabad3ea948103623074dd51c6e33156">00040</a>   string <a class="code" href="classLob.html#dabad3ea948103623074dd51c6e33156">sqlLocator</a>;  <span class="comment">// The Locator string</span>
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042   <span class="keyword">public</span>:
+<a name="l00047"></a>00047   <span class="keywordtype">void</span> <a class="code" href="classLob.html#dd9e01ad9b1e1c49672f5b85f521db3a">setFilename</a> (string f);
+<a name="l00058"></a>00058   <span class="keywordtype">void</span> <a class="code" href="classLob.html#fa2bf732c7ef0140911b8e51f7dcadd1">setSqlLocator</a> (string sl);
+<a name="l00066"></a>00066   <span class="keywordtype">int</span> <a class="code" href="classLob.html#7d49a9baac1f6cad477597a5049aa7eb">InitLob</a>(string pField , string pTable , string pWhere);
+<a name="l00067"></a>00067 };
+<a name="l00068"></a>00068 <span class="preprocessor">#endif</span>
+</pre></div><hr size="1"><address style="align: right;"><small>Generated on Wed Jun 6 11:13:38 2007 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>

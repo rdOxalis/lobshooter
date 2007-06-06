@@ -43,6 +43,13 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLob.html#dabad3ea948103623074dd51c6e33156">sqlLocator</a></td></tr>
 
 </table>
+<hr><a name="_details"></a><h2>Detailed Description</h2>
+<a class="el" href="classLob.html">Lob</a><p>
+-----------<p>
+Base <a class="el" href="classLob.html">Lob</a> Class<p>
+Author: Ralf Duenkelmann<p>
+Date : 01.06.2004 
+<p>
 <hr><h2>Member Function Documentation</h2>
 <a class="anchor" name="dd9e01ad9b1e1c49672f5b85f521db3a"></a><!-- doxytag: member="Lob::setFilename" ref="dd9e01ad9b1e1c49672f5b85f521db3a" args="(string f)" -->
 <div class="memitem">
@@ -61,6 +68,11 @@
 <div class="memdoc">
 
 <p>
+setFilename set the filename for <a class="el" href="classLob.html">Lob</a> (Up- and Download) <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>f</em>&nbsp;</td><td>filename </td></tr>
+  </table>
+</dl>
 
 </div>
 </div><p>
@@ -81,6 +93,13 @@
 <div class="memdoc">
 
 <p>
+setSqlLocator set the SQL to access the lob in the database<p>
+if inserting the lob attribute must be initialized before (use IniotLob or empty_clob() via direct SQL )<p>
+for inserting a LOB sqlLocator MUST be an select string Dont forget the locking via "for update" - clause!! <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>sl</em>&nbsp;</td><td>The SQL statement </td></tr>
+  </table>
+</dl>
 
 </div>
 </div><p>
@@ -116,6 +135,14 @@
 <div class="memdoc">
 
 <p>
+InitLob Initialize an empty <a class="el" href="classLob.html">Lob</a><p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pField</em>&nbsp;</td><td>The tables attribut where the lob is </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pTable</em>&nbsp;</td><td>table name </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pWhere</em>&nbsp;</td><td>where clause </td></tr>
+  </table>
+</dl>
 
 </div>
 </div><p>
@@ -152,7 +179,7 @@
 </div><p>
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>lib/<a class="el" href="Lob_8hpp-source.html">Lob.hpp</a><li>lib/<a class="el" href="Lob_8cpp.html">Lob.cpp</a></ul>
-<hr size="1"><address style="align: right;"><small>Generated on Fri Apr 6 13:32:01 2007 for LobShooter for Oracle (oraload) by&nbsp;
+<hr size="1"><address style="align: right;"><small>Generated on Wed Jun 6 11:13:38 2007 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>

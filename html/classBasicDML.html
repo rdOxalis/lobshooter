@@ -35,7 +35,7 @@
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBasicDML.html#e337725c2679bc243a1aaabb36ffe925">BasicDML</a> (string user, string pass, string db)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBasicDML.html#1d365cb3db7ac4f85c7ce2752fcd82e1">displayRows</a> (int selectCount, int bindCount)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBasicDML.html#7532b63f19d002231ae2c81d0ef4d4b0">displayRows</a> (int selectCount, unsigned int bindCount)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBasicDML.html#3904ae8d9268ff98c9f8f77abc580567">setSQLStmt</a> (string s)</td></tr>
 
@@ -59,6 +59,13 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBasicDML.html#d11863cf0f0e27898371a3419a5fce5b">bind_type</a> [255]</td></tr>
 
 </table>
+<hr><a name="_details"></a><h2>Detailed Description</h2>
+<a class="el" href="classBasicDML.html">BasicDML</a><p>
+-----------<p>
+Basic DML methods<p>
+Author: Ralf Duenkelmann<p>
+Date : 01.06.2004 
+<p>
 <hr><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" name="85db15bfb730ec4d0ea558757935765b"></a><!-- doxytag: member="BasicDML::BasicDML" ref="85db15bfb730ec4d0ea558757935765b" args="()" -->
 <div class="memitem">
@@ -76,7 +83,7 @@
 <div class="memdoc">
 
 <p>
-
+Def Constructor 
 </div>
 </div><p>
 <a class="anchor" name="e337725c2679bc243a1aaabb36ffe925"></a><!-- doxytag: member="BasicDML::BasicDML" ref="e337725c2679bc243a1aaabb36ffe925" args="(string user, string pass, string db)" -->
@@ -111,11 +118,18 @@
 <div class="memdoc">
 
 <p>
+Constructor <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>user</em>&nbsp;</td><td>username of Database </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pass</em>&nbsp;</td><td>password </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>db</em>&nbsp;</td><td>the database alias </td></tr>
+  </table>
+</dl>
 
 </div>
 </div><p>
 <hr><h2>Member Function Documentation</h2>
-<a class="anchor" name="1d365cb3db7ac4f85c7ce2752fcd82e1"></a><!-- doxytag: member="BasicDML::displayRows" ref="1d365cb3db7ac4f85c7ce2752fcd82e1" args="(int selectCount, int bindCount)" -->
+<a class="anchor" name="7532b63f19d002231ae2c81d0ef4d4b0"></a><!-- doxytag: member="BasicDML::displayRows" ref="7532b63f19d002231ae2c81d0ef4d4b0" args="(int selectCount, unsigned int bindCount)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -128,7 +142,7 @@
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&nbsp;</td>
+          <td class="paramtype">unsigned int&nbsp;</td>
           <td class="paramname"> <em>bindCount</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -141,7 +155,16 @@
 <div class="memdoc">
 
 <p>
-displaying rows from table FIXME 
+displayRows<p>
+execute and display the result of a select<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>selectCount</em>&nbsp;</td><td>number of select attributes </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>bindCount</em>&nbsp;</td><td>number of binds in select </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>the result as string </dd></dl>
+
 </div>
 </div><p>
 <a class="anchor" name="3904ae8d9268ff98c9f8f77abc580567"></a><!-- doxytag: member="BasicDML::setSQLStmt" ref="3904ae8d9268ff98c9f8f77abc580567" args="(string s)" -->
@@ -161,6 +184,13 @@ displaying rows from table FIXME
 <div class="memdoc">
 
 <p>
+setSQLStmt<p>
+set the SQL to be executed<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>s</em>&nbsp;</td><td>the SQL </td></tr>
+  </table>
+</dl>
 
 </div>
 </div><p>
@@ -196,6 +226,15 @@ displaying rows from table FIXME
 <div class="memdoc">
 
 <p>
+setBind<p>
+set a Bind<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pos</em>&nbsp;</td><td>the position in SQL </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>datatype</em>&nbsp;</td><td>the datatype of the bind, valid are "string" and "int" at the moment </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>wert</em>&nbsp;</td><td>the actual value of the bind </td></tr>
+  </table>
+</dl>
 
 </div>
 </div><p>
@@ -216,6 +255,13 @@ displaying rows from table FIXME
 <div class="memdoc">
 
 <p>
+InsertRow<p>
+use InsertRow for updates, inserts etc, which do not return values<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pSql</em>&nbsp;</td><td>the SQL </td></tr>
+  </table>
+</dl>
 
 </div>
 </div><p>
@@ -236,7 +282,8 @@ displaying rows from table FIXME
 <div class="memdoc">
 
 <p>
-
+InsertRow<p>
+use InsertRow for updates, inserts etc, which do not return values 
 </div>
 </div><p>
 <a class="anchor" name="70fe63c243564acf12950e8a89aed26f"></a><!-- doxytag: member="BasicDML::Commit" ref="70fe63c243564acf12950e8a89aed26f" args="(void)" -->
@@ -256,7 +303,7 @@ displaying rows from table FIXME
 <div class="memdoc">
 
 <p>
-
+Commit 
 </div>
 </div><p>
 <a class="anchor" name="5d479838af424e664e1faf9f90f91517"></a><!-- doxytag: member="BasicDML::Rollback" ref="5d479838af424e664e1faf9f90f91517" args="(void)" -->
@@ -276,7 +323,7 @@ displaying rows from table FIXME
 <div class="memdoc">
 
 <p>
-
+Rollback 
 </div>
 </div><p>
 <hr><h2>Member Data Documentation</h2>
@@ -342,7 +389,7 @@ displaying rows from table FIXME
 </div><p>
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>lib/<a class="el" href="BasicDML_8hpp-source.html">BasicDML.hpp</a><li>lib/<a class="el" href="BasicDML_8cpp.html">BasicDML.cpp</a></ul>
-<hr size="1"><address style="align: right;"><small>Generated on Fri Apr 6 13:32:01 2007 for LobShooter for Oracle (oraload) by&nbsp;
+<hr size="1"><address style="align: right;"><small>Generated on Wed Jun 6 11:13:38 2007 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>

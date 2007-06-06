@@ -17,39 +17,53 @@
     <li><a href="files.html"><span>File&nbsp;List</span></a></li>
     <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
   </ul></div>
-<h1>lib/Connection.hpp</h1><a href="Connection_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;iostream&gt;</span>
-<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;fstream&gt;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;cstdio&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;occi.h&gt;</span>
-<a name="l00006"></a>00006 <span class="keyword">using namespace </span>oracle::occi;
-<a name="l00007"></a>00007 <span class="keyword">using namespace </span>std;
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 <span class="preprocessor">#ifndef CONNECTION_HPP</span>
-<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="preprocessor">#define CONNECTION_HPP</span>
-<a name="l00011"></a><a class="code" href="classConn.html">00011</a> <span class="preprocessor"></span><span class="keyword">class </span><a class="code" href="classConn.html">Conn</a>
-<a name="l00012"></a>00012 {
-<a name="l00013"></a>00013   <span class="keyword">protected</span>:
-<a name="l00014"></a><a class="code" href="classConn.html#068787fbf621b71f6db8d43787e04056">00014</a>   string <a class="code" href="classConn.html#068787fbf621b71f6db8d43787e04056">ConnectorType</a>;
-<a name="l00015"></a><a class="code" href="classConn.html#61bc3e70296a64426d666ef95dc131c6">00015</a>   string <a class="code" href="classConn.html#61bc3e70296a64426d666ef95dc131c6">username</a>;
-<a name="l00016"></a><a class="code" href="classConn.html#cd336104df7f31672e0b1fdc9bf4f6e4">00016</a>   string <a class="code" href="classConn.html#cd336104df7f31672e0b1fdc9bf4f6e4">password</a>;
-<a name="l00017"></a><a class="code" href="classConn.html#74f11864284a2e46c05c2eac77501303">00017</a>   string <a class="code" href="classConn.html#74f11864284a2e46c05c2eac77501303">url</a>;
-<a name="l00018"></a><a class="code" href="classConn.html#71df6622bad4b4e82fbd4e3f25300f6d">00018</a>   Connection *<a class="code" href="classConn.html#71df6622bad4b4e82fbd4e3f25300f6d">conn</a>;   <span class="comment">// The connection</span>
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020   <span class="keyword">public</span>:
-<a name="l00021"></a>00021   <a class="code" href="classConn.html#6bb8dc87e57d78e930a85ef419994adb">Conn</a> ();
-<a name="l00022"></a>00022   <a class="code" href="classConn.html#6bb8dc87e57d78e930a85ef419994adb">Conn</a> (string pConnectorType);
-<a name="l00023"></a>00023   <a class="code" href="classConn.html#45fa096c27a1cdbeb295c903045ce071">~Conn</a> ();
-<a name="l00024"></a>00024   <span class="keywordtype">void</span> <a class="code" href="classConn.html#13499440046d98328d9f0bd9201aa980">setConnectorType</a> (string c);
-<a name="l00025"></a>00025   string <a class="code" href="classConn.html#179af1d325fa6c22ca03b98fe4277273">getConnectorType</a> (<span class="keywordtype">void</span>);
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027   <span class="keywordtype">void</span> <a class="code" href="classConn.html#7ffad3cc73fb38093587f03e55782758">setUsername</a> (string u);
-<a name="l00028"></a>00028   <span class="keywordtype">void</span> <a class="code" href="classConn.html#ed382d5fe843ca19b84d0ccb0a7bbefb">setPassword</a> (string p);
-<a name="l00029"></a>00029   <span class="keywordtype">void</span> <a class="code" href="classConn.html#c08da74e3b2eb7505a32a00a1c5779a5">setUrl</a> (string u);
-<a name="l00030"></a>00030   <span class="keywordtype">int</span> <a class="code" href="classConn.html#bca9e5f9e26b62fc9d3ebe4321765755">connect</a>(<span class="keywordtype">void</span>);
-<a name="l00031"></a>00031 };
-<a name="l00032"></a>00032 <span class="preprocessor">#endif</span>
-</pre></div><hr size="1"><address style="align: right;"><small>Generated on Fri Apr 6 13:32:01 2007 for LobShooter for Oracle (oraload) by&nbsp;
+<h1>lib/Connection.hpp</h1><a href="Connection_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//    &lt;oraload - loads and gets lobs (Large Objects) into and out of an Oracle Database&gt; </span>
+<a name="l00002"></a>00002 <span class="comment">//    Copyright (C) &lt;2004-2007&gt; &lt;Ralf Duenkelmann&gt;</span>
+<a name="l00003"></a>00003 <span class="comment">//</span>
+<a name="l00004"></a>00004 <span class="comment">//    This library is free software; you can redistribute it and/or modify it under the terms of the </span>
+<a name="l00005"></a>00005 <span class="comment">//    GNU Lesser General Public License as published by the Free Software Foundation; </span>
+<a name="l00006"></a>00006 <span class="comment">//    either version 2.1 of the License, or (at your option) any later version.</span>
+<a name="l00007"></a>00007 <span class="comment">//</span>
+<a name="l00008"></a>00008 <span class="comment">//    This library is distributed in the hope that it will be useful, </span>
+<a name="l00009"></a>00009 <span class="comment">//    but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS </span>
+<a name="l00010"></a>00010 <span class="comment">//    FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.</span>
+<a name="l00011"></a>00011 <span class="comment">//</span>
+<a name="l00012"></a>00012 <span class="comment">//    You should have received a copy of the GNU Lesser General Public License along with this library; </span>
+<a name="l00013"></a>00013 <span class="comment">//    if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;fstream&gt;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;cstdio&gt;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;occi.h&gt;</span>
+<a name="l00020"></a>00020 <span class="keyword">using namespace </span>oracle::occi;
+<a name="l00021"></a>00021 <span class="keyword">using namespace </span>std;
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="preprocessor">#ifndef CONNECTION_HPP</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#define CONNECTION_HPP</span>
+<a name="l00025"></a><a class="code" href="classConn.html">00025</a> <span class="preprocessor"></span><span class="keyword">class </span><a class="code" href="classConn.html">Conn</a>
+<a name="l00026"></a>00026 {
+<a name="l00027"></a>00027   <span class="keyword">protected</span>:
+<a name="l00028"></a><a class="code" href="classConn.html#068787fbf621b71f6db8d43787e04056">00028</a>   string <a class="code" href="classConn.html#068787fbf621b71f6db8d43787e04056">ConnectorType</a>;
+<a name="l00029"></a><a class="code" href="classConn.html#61bc3e70296a64426d666ef95dc131c6">00029</a>   string <a class="code" href="classConn.html#61bc3e70296a64426d666ef95dc131c6">username</a>;
+<a name="l00030"></a><a class="code" href="classConn.html#cd336104df7f31672e0b1fdc9bf4f6e4">00030</a>   string <a class="code" href="classConn.html#cd336104df7f31672e0b1fdc9bf4f6e4">password</a>;
+<a name="l00031"></a><a class="code" href="classConn.html#74f11864284a2e46c05c2eac77501303">00031</a>   string <a class="code" href="classConn.html#74f11864284a2e46c05c2eac77501303">url</a>;
+<a name="l00032"></a><a class="code" href="classConn.html#71df6622bad4b4e82fbd4e3f25300f6d">00032</a>   Connection *<a class="code" href="classConn.html#71df6622bad4b4e82fbd4e3f25300f6d">conn</a>;   <span class="comment">// The connection</span>
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034   <span class="keyword">public</span>:
+<a name="l00035"></a>00035   <a class="code" href="classConn.html#6bb8dc87e57d78e930a85ef419994adb">Conn</a> ();
+<a name="l00036"></a>00036   <a class="code" href="classConn.html#6bb8dc87e57d78e930a85ef419994adb">Conn</a> (string pConnectorType);
+<a name="l00037"></a>00037   <a class="code" href="classConn.html#45fa096c27a1cdbeb295c903045ce071">~Conn</a> ();
+<a name="l00038"></a>00038   <span class="keywordtype">void</span> <a class="code" href="classConn.html#13499440046d98328d9f0bd9201aa980">setConnectorType</a> (string c);
+<a name="l00039"></a>00039   string <a class="code" href="classConn.html#179af1d325fa6c22ca03b98fe4277273">getConnectorType</a> (<span class="keywordtype">void</span>);
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041   <span class="keywordtype">void</span> <a class="code" href="classConn.html#7ffad3cc73fb38093587f03e55782758">setUsername</a> (string u);
+<a name="l00042"></a>00042   <span class="keywordtype">void</span> <a class="code" href="classConn.html#ed382d5fe843ca19b84d0ccb0a7bbefb">setPassword</a> (string p);
+<a name="l00043"></a>00043   <span class="keywordtype">void</span> <a class="code" href="classConn.html#c08da74e3b2eb7505a32a00a1c5779a5">setUrl</a> (string u);
+<a name="l00044"></a>00044   <span class="keywordtype">int</span> <a class="code" href="classConn.html#bca9e5f9e26b62fc9d3ebe4321765755">connect</a>(<span class="keywordtype">void</span>);
+<a name="l00045"></a>00045 };
+<a name="l00046"></a>00046 <span class="preprocessor">#endif</span>
+</pre></div><hr size="1"><address style="align: right;"><small>Generated on Wed Jun 6 11:13:38 2007 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>
