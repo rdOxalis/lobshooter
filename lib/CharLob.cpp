@@ -54,6 +54,7 @@ int CharLob::DownloadClobData(void){
     if (!ofFile)
       {
         cout << "Could not open file for writing." << endl;
+        this->WriteLogFile("Could not open file for writing.");
         delete[] buffer;
         return(-1);
       }
@@ -85,6 +86,7 @@ int CharLob::DownloadClobData(void){
     }
     catch (SQLException e){
       cout << e.getMessage() << endl;
+      this->WriteLogFile(e.getMessage());
       delete[] buffer;
       return(-3);
     }
@@ -101,7 +103,8 @@ int CharLob::UploadClobData(void){
     countFile.open((const char*)filename.c_str(),ios_base::in);
     if (!countFile)
     {
-      cout << "file not found\n";
+      cout << "file not found" << endl;
+      this->WriteLogFile("Could not open file for reading.");
       //delete[] buffer;
       return(-1);
     }
@@ -150,6 +153,7 @@ int CharLob::UploadClobData(void){
     }
     catch(SQLException e){
       cout <<e.getMessage();
+      this->WriteLogFile(e.getMessage());
       delete[] buffer;
       return (-3);
     }

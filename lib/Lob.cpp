@@ -26,6 +26,9 @@ int Lob::InitLob(string pField , string pTable , string pWhere){
       cout<<"Exception thrown for InitLob"<<endl;
       cout<<"Error number: "<<  ex.getErrorCode() << endl;
       cout<<ex.getMessage() << endl;
+      this->WriteLogFile("Exception thrown for InitLob");
+      this->WriteLogFile(ex.getMessage());	
+      
       return(-1);
     }
     conn->terminateStatement (stmt);

@@ -55,6 +55,7 @@ int BinLob::DownloadBlobData(void){
     if (!ofFile)
       {
         cout << "Could not open file for writing." << endl;
+        this->WriteLogFile("Could not open file for writing.");
         delete[] buffer;
         return(-1);
       }
@@ -85,6 +86,7 @@ int BinLob::DownloadBlobData(void){
     }
     catch (SQLException e){
       cout << e.getMessage();
+      this->WriteLogFile(e.getMessage());
       free(buffer);
       return(-3);
     }
@@ -102,7 +104,8 @@ int BinLob::UploadBlobData(void){
     countFile.open((const char*)filename.c_str(),ios_base::binary|ios_base::in);
     if (!countFile)
     {
-      cout << "file not found\n";
+      cout << "file not found" << endl;
+      this->WriteLogFile("Could not open file for reading.");
       //delete[] buffer;
       return(-1);
     }
@@ -125,6 +128,7 @@ int BinLob::UploadBlobData(void){
     if (!inFile)
     {
       cout << "file not found\n";
+      this->WriteLogFile("Could not open file for reading.");
       delete[] buffer;
       return(-1);
     }
@@ -154,7 +158,8 @@ int BinLob::UploadBlobData(void){
       stmt->closeResultSet(rset);
     }
     catch(SQLException e){
-      cout <<e.getMessage();
+      cout <<e.getMessage() << endl;
+      this->WriteLogFile(e.getMessage());
       return (-3);
     }
     return(0);

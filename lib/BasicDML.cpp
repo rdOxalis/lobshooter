@@ -37,6 +37,8 @@ int BasicDML::InsertRow(string pSql){
       cout<<"Exception thrown for InsertRow"<<endl;
       cout<<"Error number: "<<  ex.getErrorCode() << endl;
       cout<<ex.getMessage() << endl;
+      this->WriteLogFile("Exception thrown for InsertRow");
+      this->WriteLogFile(ex.getMessage());
       return(-1);
     }
     conn->terminateStatement (stmt);
@@ -72,6 +74,9 @@ string BasicDML::displayRows (int selectCount,unsigned int bindCount)
        cout<<"Exception thrown when binding"<<endl;
        cout<<"Error number: "<<  ex.getErrorCode() << endl;
        cout<<ex.getMessage() << endl;
+       this->WriteLogFile("Exception thrown when binding");
+       this->WriteLogFile(ex.getMessage());
+       return ("");
       }  
     }
     ResultSet *rset = stmt->executeQuery ();
@@ -93,6 +98,9 @@ string BasicDML::displayRows (int selectCount,unsigned int bindCount)
      cout<<"Exception thrown for displayRows"<<endl;
      cout<<"Error number: "<<  ex.getErrorCode() << endl;
      cout<<ex.getMessage() << endl;
+     this->WriteLogFile("Exception thrown for displayRows");
+     this->WriteLogFile(ex.getMessage());
+     return ("");
     }
     stmt->closeResultSet (rset);
     conn->terminateStatement (stmt);

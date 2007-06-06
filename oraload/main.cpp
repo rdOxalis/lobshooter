@@ -3,15 +3,16 @@
 //  -----------
 //  Upload and Download of Lobs to an Oracle Server
 //
-//  Author: Ralf Dnkelmann
+//  Author: Ralf Duenkelmann
 //  Date :  01.06.2004
 //
 //  CHANGES
-//  11.11.2004 R.Dnkelmann
+//  11.11.2004 R.Duenkelmann
 //             - making use of OCCI
 //             - CLOB management
 //  08.12.2004 removed old OCI functions
 //  23.01.2007 usage
+//  06.06.2007 Logging
 // ************************************************
 
 //  ************************************************

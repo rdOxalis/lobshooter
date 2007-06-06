@@ -106,6 +106,10 @@ void runCharLobTest(void)
 {
   // Upload of CharData
   CharLob CL("hr","hr","//lynx:1521/xe");
+  CL.setLogFile("testsuiteCL.log");
+  CL.FlushLogFile();
+  CL.WriteLogFile("runCharLobTest");
+  
   CL.connect();
   CL.setSQLStmt("drop table TestSuiteCL");
   CL.InsertRow();
@@ -175,6 +179,9 @@ void runFaultySql(void)
 void runBinLobTest(void) 
 {
   BinLob BL("hr","hr","//lynx:1521/xe");
+  BL.setLogFile("testsuiteBL.log");
+  BL.FlushLogFile();
+  BL.WriteLogFile("runBinLobTest");
   BL.connect();
   BL.setSQLStmt("drop table TestSuiteBL");
   BL.InsertRow();
