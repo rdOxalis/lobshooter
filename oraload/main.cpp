@@ -120,6 +120,7 @@ using namespace std;
 #include <occi.h>
 #include "CharLob.hpp"
 #include "BinLob.hpp"
+#include "Log.hpp"
 
 using namespace oracle::occi;
 
@@ -143,102 +144,6 @@ int multifile = 0;
     \return calculated time as String Object (dd.mm.yyyy)
 */
 // ************************************************
-string GetTime()
-{
-  time_t t ;
-
-  t = time(NULL);  // aktuelle Zeit in t
-
-  // mit tm struct weiter arbeiten
-  tm *   tpointer = localtime (&t); // zeiger auf tm struct
-
-  char DS[20];
-  strcpy(DS , "");
-  size_t strsize = sizeof(DS);
-  strsize = strftime(DS, strsize, "%d.%m.%Y %H:%M:%S", tpointer);
-  return(string(DS));
-}
-
-// FIXME log class needed
-void FlushLogFile()
-{
-  std::ofstream out(vLogFile.c_str(), std::ios_base::trunc);
-  out.close();
-}
-
-int WriteLogFile(string pLog)
-{
-  std::ofstream out(vLogFile.c_str(), std::ios_base::app);
-  if ( !out ) {
-    perror("Outputdatei kann nicht zum Schreiben geöffnet werden!");
-    return (EXIT_FAILURE);
-  }
-
-  out << GetTime() << " :: " << pLog.c_str() << "\n";
-  out.close();
-  // Written? Sure?
-  if (! out) {
-    return (EXIT_FAILURE);
-  }
-  return(0);
-}
-
-// FIXME Err-Class needed
-void CheckErr(OCIError* errhp, sword status, string mark)
-{
-  text errbuf[2048];
-  sb4 errcode = 0;
-  string s;
-  switch (status)
-  {
-  case OCI_SUCCESS:
-    break;
-  case OCI_SUCCESS_WITH_INFO:
- 	s.assign("Error - OCI_SUCCESS_WITH_INFO at ");
-	s += mark.c_str();
-	s += "\n";
-    WriteLogFile(s);
-    break;
-  case OCI_NEED_DATA:
- 	s.assign("Error - OCI_NEED_DATA at ");
-	s += mark.c_str();
-	s += "\n";
-    WriteLogFile(s);
-    break;
-  case OCI_NO_DATA:
- 	s.assign("Error - OCI_NODATA at ");
-	s += mark.c_str();
-	s += "\n";
-    WriteLogFile(s);
-    break;
-  case OCI_ERROR:
-    (void) OCIErrorGet((dvoid *)errhp, (ub4) 1, (text *) NULL, &errcode,
-                        errbuf, (ub4) sizeof(errbuf), OCI_HTYPE_ERROR);
- 	s.assign((char*)errbuf);
-	s += "                       at ";
-	s += mark.c_str();
-    WriteLogFile(s);
-
-    break;
-  case OCI_INVALID_HANDLE:
- 	s.assign("Error - OCI_INVALID_HANDLE at ");
-	s += mark.c_str();
-    WriteLogFile(s);
-    break;
-  case OCI_STILL_EXECUTING:
- 	s.assign("Error - OCI_STILL_EXECUTE at ");
-	s += mark.c_str();
-    WriteLogFile(s);
-    break;
-  case OCI_CONTINUE:
- 	s.assign("Error - OCI_CONTINUE at ");
-	s += mark.c_str();
-    WriteLogFile(s);
-    break;
-  default:
-    break;
-  }
-}
 
 void Version(){
  cout << "oraload." << VERSION << endl;
@@ -293,31 +198,38 @@ int main(int argc, char *argv[])
     }
   }
 
-  FlushLogFile();
-  WriteLogFile(argv[0]);
-  
-  //CharLob *CL = new CharLob();
-  //BinLob  *BL = new BinLob();
+    
   CharLob *CL;
   BinLob  *BL;
 
-
   if ( (strcmp(argv[4],"UC") == 0) || (strcmp(argv[4],"DC") == 0) ){
     CL = new CharLob(argv[1],argv[2],argv[3]);
+  	CL->setLogFile(vLogFile);
+    CL->FlushLogFile();
+    CL->WriteLogFile(argv[0]);
     if ( CL->connect() == 0 ){
       CL->setFilename(argv[6]);
       CL->setSqlLocator(argv[5]);
 	}
-	else{  // couldn't connect, returning -1
+	else{  // couldn't connect, returning -9
 		return (-9);
 	}
+	
   }
   if ( (strcmp(argv[4],"UB") == 0) || (strcmp(argv[4],"DB") == 0) ){
 
     BL = new BinLob(argv[1],argv[2],argv[3]);
-    BL->connect();
-    BL->setFilename(argv[6]);
-    BL->setSqlLocator(argv[5]);
+  	BL->setLogFile(vLogFile);
+    BL->FlushLogFile();
+    BL->WriteLogFile(argv[0]);
+    if ( BL->connect() == 0 ) {
+       BL->setFilename(argv[6]);
+       BL->setSqlLocator(argv[5]);
+    }
+	else{  // couldn't connect, returning -9
+		return (-9);
+	}
+	
   }
 
   // Upload of CharData

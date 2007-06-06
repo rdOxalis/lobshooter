@@ -19,29 +19,19 @@
 #include <occi.h>
 using namespace oracle::occi;
 using namespace std;
-#include "Log.hpp"
 
-#ifndef CONNECTION_HPP
-#define CONNECTION_HPP
-class Conn:public Log
+#ifndef LOG_HPP
+#define LOG_HPP
+class Log
 {
   protected:
-  string ConnectorType;
-  string username;
-  string password;
-  string url;
-  Connection *conn;   // The connection
-
+  
   public:
-  Conn ();
-  Conn (string pConnectorType);
-  ~Conn ();
-  void setConnectorType (string c);
-  string getConnectorType (void);
-
-  void setUsername (string u);
-  void setPassword (string p);
-  void setUrl (string u);
-  int connect(void);
+  string        vLogFile;  
+  string GetTime();
+  
+  void setLogFile(string);
+  void FlushLogFile();
+  int WriteLogFile(string);
 };
 #endif

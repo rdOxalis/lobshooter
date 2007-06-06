@@ -12,36 +12,53 @@
 //    You should have received a copy of the GNU Lesser General Public License along with this library; 
 //    if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-#include <iostream>
-#include <stdlib.h>
-#include <fstream>
-#include <cstdio>
-#include <occi.h>
-using namespace oracle::occi;
-using namespace std;
 #include "Log.hpp"
 
-#ifndef CONNECTION_HPP
-#define CONNECTION_HPP
-class Conn:public Log
+
+string Log::GetTime()
 {
-  protected:
-  string ConnectorType;
-  string username;
-  string password;
-  string url;
-  Connection *conn;   // The connection
+  time_t t ;
 
-  public:
-  Conn ();
-  Conn (string pConnectorType);
-  ~Conn ();
-  void setConnectorType (string c);
-  string getConnectorType (void);
+  t = time(NULL);  // aktuelle Zeit in t
 
-  void setUsername (string u);
-  void setPassword (string p);
-  void setUrl (string u);
-  int connect(void);
-};
-#endif
+  // mit tm struct weiter arbeiten
+  tm *   tpointer = localtime (&t); // zeiger auf tm struct
+
+  char DS[20];
+  strcpy(DS , "");
+  size_t strsize = sizeof(DS);
+  strsize = strftime(DS, strsize, "%d.%m.%Y %H:%M:%S", tpointer);
+  return(string(DS));
+}
+
+
+void Log::FlushLogFile(void)
+{
+  std::ofstream out(vLogFile.c_str(), std::ios_base::trunc);
+  out.close(); 
+}
+
+int Log::WriteLogFile(string pLog)
+{
+  std::ofstream out(vLogFile.c_str(), std::ios_base::app);
+  if ( !out ) {
+    cout << "Unable to open Log File";
+    return (EXIT_FAILURE);
+  }
+
+  out << GetTime() << " :: " << pLog.c_str() << "\n";
+  out.close();
+  // Written? Sure?
+  if (! out) {
+    return (EXIT_FAILURE);
+  }
+  return(0);
+}
+
+  
+void Log::setLogFile(string f)
+{
+   this->vLogFile = f;
+}
+ 
+
