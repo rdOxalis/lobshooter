@@ -21,24 +21,19 @@ void Lua::init (void )
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
-	/* load Lua base libraries */
-    //luaopen_io(L); 
-    //luaopen_base(L);
-    //luaopen_table(L);
-    //luaopen_string(L);
-    //luaopen_math(L);
 }
 
 
-void Lua::do_file(const char* plua_file)
+int Lua::do_file(const char* plua_file)
 {
-	//load the file
-	int s = luaL_loadfile(L, plua_file);
+   //load the file
+   int s = luaL_loadfile(L, plua_file);
 
-    if ( s==0 ) {
+   if ( s==0 ) {
       // execute Lua program
       s = lua_pcall(L, 0, LUA_MULTRET, 0);
-    }
+   }
+   return ( s );    
 }
 
 void Lua::close()

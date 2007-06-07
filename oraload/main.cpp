@@ -13,6 +13,7 @@
 //  08.12.2004 removed old OCI functions
 //  23.01.2007 usage
 //  06.06.2007 Logging
+//  07.06.2007 Multifile-Support (experimental)
 // ************************************************
 
 //  ************************************************
@@ -42,7 +43,7 @@
  * oraload comes with a library (libloadutil) and the main program.
  * For the moment oraload is a command line utility, that takes parameters like this
  *
- * oraload user pass db DC|UC|DB|UB SqlString filename [options]
+ * oraload [-v] user pass db DC|UC|DB|UB SqlString [-m|-ml] filename[,file2,...] [options]
  *
  *
  *  , where 
@@ -56,10 +57,13 @@
  *  - UB   = Upload a bin lob
  *  - SqlString = the sql which sais where to put the lob (or where to get it from)
  *  - filename = the filename for input or output (the file that you want to make a database lob from)
+ *               in case you use option -ml, filename holds the list of files to be processed
  * 
  *  Options
- *  - -l logfile_name = path to the file where oraload should put the logging infos.
+ *  - -l logfile_name => path to the file where oraload should put the logging infos.
  *  - -v show version number
+ *  - -m filename [,file2,...] multifile support
+ *  - -ml filename => in this case filename holds a simple list of files to be processed
  *
  * \section Download
  * Download from 
@@ -143,21 +147,18 @@ void Version(){
 }
 
 void Usage(char* vProg){
- cout << "Usage: " << vProg << " user pass db DC|UC|DB|UB SqlString filename [options]" << endl;
+ cout << "Usage: " << vProg << " oraload [-v] user pass db DC|UC|DB|UB SqlString [-m|-ml] filename[,file2,...] [options]" << endl;
  cout << "                  " << " DC:Download Clob     UC:Upload Clob" << endl;
  cout << "                  " << " DB:Download Blob     UB:Upload Blob" << endl;
  cout << "Options: " << endl;
- cout << "-l logfile_name      Assign Log File Name (default /tmp/oraload.log) " << endl;
+ cout << "-l  logfile_name     Assign Log File Name (default /tmp/oraload.log) " << endl;
  cout << "-v                   Show version number " << endl;
+ cout << "-m  filename [,file2,...] multifile support" << endl;
+ cout << "-ml filename => in this case filename holds a simple list of files to be processed" << endl;
  }
 
 int main(int argc, char *argv[])
 {
-  Lua LuaInterpretor;
-  LuaInterpretor.init();
-  LuaInterpretor.do_file("lib/multifile.lua");
-  LuaInterpretor.close();
-	
   	
   if ( ( argc == 2) && (( (strcmp(argv[1],"-v") == 0) || (strcmp(argv[1],"--version") == 0) ))  ) {
     Version();
@@ -169,6 +170,17 @@ int main(int argc, char *argv[])
     return (-1);
   }
 
+  if ((strcmp(argv[6],"-m") == 0 || strcmp(argv[6],"-ml") == 0))  {
+  	// Multifile Support
+  	multifile = 1;
+    Lua LuaInterpretor;
+    LuaInterpretor.init();
+    int rc = LuaInterpretor.do_file("lib/multifile.lua");
+    LuaInterpretor.close();
+    cout << "RC" << rc << endl;;
+    return (0);
+  }
+     
   char* option;
   if(argc>7) {
     for(int i=7;i<argc;i++) {
@@ -185,10 +197,6 @@ int main(int argc, char *argv[])
       else if(!strcmp(option,"-h")) {
         Usage(argv[0]);
         return (1);
-      }
-      else if(!strcmp(option,"-m")) {
-        // Multi File Load, not working yet
-        multifile = 1;
       }
       else {
         Usage(argv[0]);

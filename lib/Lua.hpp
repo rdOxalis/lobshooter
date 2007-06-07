@@ -33,7 +33,7 @@ class Lua
   
   public:
   void   init();
-  void   do_file(const char*);
+  int    do_file(const char*);
   void   close();  
 };
 
