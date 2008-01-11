@@ -28,7 +28,6 @@ int Lua::do_file(const char* plua_file)
 {
    //load the file
    int s = luaL_loadfile(L, plua_file);
-
    if ( s==0 ) {
       // execute Lua program
       s = lua_pcall(L, 0, LUA_MULTRET, 0);

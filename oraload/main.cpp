@@ -130,15 +130,8 @@ using namespace std;
 using namespace oracle::occi;
 
 static string const VERSION("0.2");
-
-static OCIEnv        *envhp;
-static OCIError      *errhp;
-static OCIServer     *srvhp;
-static OCISvcCtx     *svchp;
-static OCISession    *authp = (OCISession *) 0;
-static OCIStmt       *stmthp;
-static sword         rc;
-static string        vLogFile("oraload.log");
+static string vLogFile("oraload.log");
+static string vCharSet("UTF8");
 
 int multifile = 0;
 
@@ -152,9 +145,10 @@ void Usage(char* vProg){
  cout << "                  " << " DB:Download Blob     UB:Upload Blob" << endl;
  cout << "Options: " << endl;
  cout << "-l  logfile_name     Assign Log File Name (default /tmp/oraload.log) " << endl;
+ cout << "-c  CharSet          Assign CharSet for CharLobs (default UTF8) " << endl;
  cout << "-v                   Show version number " << endl;
- //cout << "-m  filename [,file2,...] multifile support" << endl;
- //cout << "-ml filename => in this case filename holds a simple list of files to be processed" << endl;
+ cout << "-m  filename [,file2,...] multifile support" << endl;
+ cout << "-ml filename => in this case filename holds a simple list of files to be processed" << endl;
  }
 
 int main(int argc, char *argv[])
@@ -175,7 +169,7 @@ int main(int argc, char *argv[])
   	multifile = 1;
     Lua LuaInterpretor;
     LuaInterpretor.init();
-    int rc = LuaInterpretor.do_file("lib/multifile.lua");
+    int rc = LuaInterpretor.do_file("/usr/local/lib/multifile.lua");
     LuaInterpretor.close();
     cout << "RC" << rc << endl;;
     return (0);
@@ -194,6 +188,15 @@ int main(int argc, char *argv[])
         }
         vLogFile.assign(argv[i]);
       }
+      if(!strcmp(option,"-c")){
+        // Assign different CharSet to char lob
+        i++;
+        if ( argc < (i+1) ) {
+          Usage(argv[0]);
+          return (-1);
+        }
+        vCharSet.assign(argv[i]);
+      }
       else if(!strcmp(option,"-h")) {
         Usage(argv[0]);
         return (1);
@@ -211,6 +214,7 @@ int main(int argc, char *argv[])
 
   if ( (strcmp(argv[4],"UC") == 0) || (strcmp(argv[4],"DC") == 0) ){
     CL = new CharLob(argv[1],argv[2],argv[3]);
+    CL->setCharSet(vCharSet);
   	CL->setLogFile(vLogFile);
     CL->FlushLogFile();
     CL->WriteLogFile(argv[0]);
