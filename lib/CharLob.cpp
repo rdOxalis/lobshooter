@@ -65,6 +65,8 @@ int CharLob::DownloadClobData(void){
         while(rset->next())
         {
           Clob clob = rset->getClob(1);
+          //TODO make charset choosable from command line
+          clob.setCharSetId("UTF8");
           Stream *strm=clob.getStream();
           
           //strm->readBuffer(buffer,clob.length());
@@ -77,7 +79,7 @@ int CharLob::DownloadClobData(void){
             }
             bytesRead = strm->readBuffer((char*)buffer,200);
           }
-          
+          cout << buffer;          
           clob.closeStream(strm);
           //ofFile << buffer;
           ofFile.close();
@@ -133,10 +135,16 @@ int CharLob::UploadClobData(void){
       while(rset->next())
       {
         Clob clob = rset->getClob(1);
+        
+        // Char Set ?
+        //TODO make charset choosable from command line
+        clob.setCharSetId("UTF8");
+        
         Stream *strm=clob.getStream();
         //memset (buffer, NULL, bufsize);
         memset (buffer, 0, bufsize);
         inFile.read(buffer,bufsize);
+        cout << buffer;
         strm->writeBuffer(buffer,bufsize);
         strcpy(buffer,"");
         size=strlen(buffer);

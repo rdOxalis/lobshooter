@@ -153,8 +153,8 @@ void Usage(char* vProg){
  cout << "Options: " << endl;
  cout << "-l  logfile_name     Assign Log File Name (default /tmp/oraload.log) " << endl;
  cout << "-v                   Show version number " << endl;
- cout << "-m  filename [,file2,...] multifile support" << endl;
- cout << "-ml filename => in this case filename holds a simple list of files to be processed" << endl;
+ //cout << "-m  filename [,file2,...] multifile support" << endl;
+ //cout << "-ml filename => in this case filename holds a simple list of files to be processed" << endl;
  }
 
 int main(int argc, char *argv[])
