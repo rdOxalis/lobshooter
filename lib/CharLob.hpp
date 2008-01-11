@@ -47,7 +47,9 @@ using namespace std;
 */
 class CharLob:public Lob
 {
-
+  private:
+	string char_set; 
+	
   public:
   /*!  Def Constructor
   */
@@ -82,6 +84,8 @@ class CharLob:public Lob
    *  
   */
   int UploadClobData(void);
+  void setCharSet(string pCharSet);
+  string getCharSet();
 
 };//end of class
 #endif
