@@ -1,2 +1,0 @@
-/usr/bin/ar cr liblobwizard.a  CMakeFiles/lobwizard.dir/LobWizard.o CMakeFiles/lobwizard.dir/moc_LobWizard.o CMakeFiles/lobwizard.dir/moc_ui_LobWizard.o
-/usr/bin/ranlib liblobwizard.a
