@@ -13,7 +13,7 @@
 //  08.12.2004 removed old OCI functions
 //  23.01.2007 usage
 //  06.06.2007 Logging
-//  20.04.2009 Char Set stuff
+//  20.04.2009 Char Set stuff, GUI
 // ************************************************
 
 //  ************************************************
@@ -120,6 +120,7 @@ using namespace std;
 #include "CharLob.hpp"
 #include "BinLob.hpp"
 #include "Log.hpp"
+#include "LobWizard.h"
 
 using namespace oracle::occi;
 
@@ -145,6 +146,14 @@ void Usage(char* vProg){
 
 int main(int argc, char *argv[])
 {
+  if ( strcmp(argv[1],"-gui") == 0 ){
+	QApplication app(argc, argv);
+    LobWizard *wiz = new LobWizard;
+    wiz->show();
+	
+    return app.exec();
+
+  }
   	
   if ( ( argc == 2) && (( (strcmp(argv[1],"-v") == 0) || (strcmp(argv[1],"--version") == 0) ))  ) {
     Version();
