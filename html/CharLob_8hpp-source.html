@@ -45,18 +45,22 @@
 <a name="l00036"></a>00036 <span class="preprocessor"></span>
 <a name="l00048"></a><a class="code" href="classCharLob.html">00048</a> <span class="keyword">class </span><a class="code" href="classCharLob.html">CharLob</a>:<span class="keyword">public</span> <a class="code" href="classLob.html">Lob</a>
 <a name="l00049"></a>00049 {
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051   <span class="keyword">public</span>:
-<a name="l00054"></a>00054   <a class="code" href="classCharLob.html#39c964abe092846921a504a2e43d3e75">CharLob</a> ();
-<a name="l00062"></a>00062   <a class="code" href="classCharLob.html#39c964abe092846921a504a2e43d3e75">CharLob</a> (<span class="keywordtype">char</span>* user , <span class="keywordtype">char</span>* pass , <span class="keywordtype">char</span>* db, <span class="keywordtype">char</span>* cfile);
-<a name="l00069"></a>00069   <a class="code" href="classCharLob.html#39c964abe092846921a504a2e43d3e75">CharLob</a> (<span class="keywordtype">char</span>* user , <span class="keywordtype">char</span>* pass , <span class="keywordtype">char</span>* db);
-<a name="l00072"></a>00072   <a class="code" href="classCharLob.html#69ae22169314e33adf1d77f325b90fd9">~CharLob</a> ();
-<a name="l00078"></a>00078   <span class="keywordtype">int</span> <a class="code" href="classCharLob.html#b7e20ee43fcc8543226b105dbaa02ea5">DownloadClobData</a>(<span class="keywordtype">void</span>);
-<a name="l00084"></a>00084   <span class="keywordtype">int</span> <a class="code" href="classCharLob.html#782dc2fb7e93355d4eefddc3f7fce283">UploadClobData</a>(<span class="keywordtype">void</span>);
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086 };<span class="comment">//end of class</span>
-<a name="l00087"></a>00087 <span class="preprocessor">#endif</span>
-</pre></div><hr size="1"><address style="align: right;"><small>Generated on Wed Jun 6 12:12:55 2007 for LobShooter for Oracle (oraload) by&nbsp;
+<a name="l00050"></a>00050   <span class="keyword">private</span>:
+<a name="l00051"></a><a class="code" href="classCharLob.html#f8e2fb1e562c3344f0cd591d742b9140">00051</a>         string <a class="code" href="classCharLob.html#f8e2fb1e562c3344f0cd591d742b9140">char_set</a>; 
+<a name="l00052"></a>00052         
+<a name="l00053"></a>00053   <span class="keyword">public</span>:
+<a name="l00056"></a>00056   <a class="code" href="classCharLob.html#39c964abe092846921a504a2e43d3e75">CharLob</a> ();
+<a name="l00064"></a>00064   <a class="code" href="classCharLob.html#39c964abe092846921a504a2e43d3e75">CharLob</a> (<span class="keywordtype">char</span>* user , <span class="keywordtype">char</span>* pass , <span class="keywordtype">char</span>* db, <span class="keywordtype">char</span>* cfile);
+<a name="l00071"></a>00071   <a class="code" href="classCharLob.html#39c964abe092846921a504a2e43d3e75">CharLob</a> (<span class="keywordtype">char</span>* user , <span class="keywordtype">char</span>* pass , <span class="keywordtype">char</span>* db);
+<a name="l00074"></a>00074   <a class="code" href="classCharLob.html#69ae22169314e33adf1d77f325b90fd9">~CharLob</a> ();
+<a name="l00080"></a>00080   <span class="keywordtype">int</span> <a class="code" href="classCharLob.html#b7e20ee43fcc8543226b105dbaa02ea5">DownloadClobData</a>(<span class="keywordtype">void</span>);
+<a name="l00086"></a>00086   <span class="keywordtype">int</span> <a class="code" href="classCharLob.html#782dc2fb7e93355d4eefddc3f7fce283">UploadClobData</a>(<span class="keywordtype">void</span>);
+<a name="l00087"></a>00087   <span class="keywordtype">void</span> <a class="code" href="classCharLob.html#acd0c3f4058fa52bd86248a2b356eac0">setCharSet</a>(string pCharSet);
+<a name="l00088"></a>00088   string <a class="code" href="classCharLob.html#11739212b66196dfa3fac732e7bf66d5">getCharSet</a>();
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090 };<span class="comment">//end of class</span>
+<a name="l00091"></a>00091 <span class="preprocessor">#endif</span>
+</pre></div><hr size="1"><address style="align: right;"><small>Generated on Mon Apr 20 15:04:34 2009 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>

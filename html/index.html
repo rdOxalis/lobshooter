@@ -14,16 +14,16 @@
   </ul></div>
 <h1>LobShooter for Oracle (oraload)</h1>
 <p>
-<h3 align="center">0.1 </h3><h2><a class="anchor" name="intro_sec">
+<h3 align="center">0.2 </h3><h2><a class="anchor" name="intro_sec">
 Introduction</a></h2>
 LobShooter for Oracle (oraload) is a utility to easily up- and download Lob-Files to and from an Oracle database. You are able to directly load binary (blob) and char data with it. oraload comes with a library (libloadutil) and the main program. For the moment oraload is a command line utility, that takes parameters like this<p>
-oraload user pass db DC|UC|DB|UB SqlString filename [options]<p>
+oraload [-v] user pass db DC|UC|DB|UB SqlString filename[,file2,...] [options]<p>
 , where<p>
 <ul>
-<li>user = database user</li><li>pass = database password</li><li>db = database tnsname</li><li>DC = Download a char lob</li><li>UC = Upload a char lob</li><li>DB = Download a bin lob</li><li>UB = Upload a bin lob</li><li>SqlString = the sql which sais where to put the lob (or where to get it from)</li><li>filename = the filename for input or output (the file that you want to make a database lob from)</li></ul>
+<li>user = database user</li><li>pass = database password</li><li>db = database tnsname</li><li>DC = Download a char lob</li><li>UC = Upload a char lob</li><li>DB = Download a bin lob</li><li>UB = Upload a bin lob</li><li>SqlString = the sql which sais where to put the lob (or where to get it from)</li><li>filename = the filename for input or output (the file that you want to make a database lob from) in case you use option -ml, filename holds the list of files to be processed</li></ul>
 <p>
 Options<ul>
-<li>-l logfile_name = path to the file where oraload should put the logging infos.</li><li>-v show version number</li></ul>
+<li>-l logfile_name =&gt; path to the file where oraload should put the logging infos.</li><li>-c char set =&gt; assign a Char Set when dealing with Char Lobs. (available sets, see in Oracle Globalization Support Guide, Appendix A)</li><li>-v show version number</li></ul>
 <h2><a class="anchor" name="Download">
 Download</a></h2>
 Download from<ul>
@@ -55,10 +55,8 @@ Examples</a></h3>
 <li>note that you always have to lock the row with "for update", if you upload something. You do not need that when downloading.</li></ul>
 <p>
 Example with EasyConnect (e.g. if you have InstantClient and no TNSNAMES.ora)<ul>
-<li>oraload hr hr //lynx:1521/xe DC "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt</li></ul>
-<h3><a class="anchor" name="Using">
-Using the library</a></h3>
-You can use the library to implement in your own programs. A good starting point is the test-directory with the unit test sources. For a better understanding of classes and methods continue reading this documentation <hr size="1"><address style="align: right;"><small>Generated on Wed Jun 6 12:12:55 2007 for LobShooter for Oracle (oraload) by&nbsp;
+<li>oraload hr hr //lynx:1521/xe DCB "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt </li></ul>
+<hr size="1"><address style="align: right;"><small>Generated on Mon Apr 20 15:04:34 2009 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>

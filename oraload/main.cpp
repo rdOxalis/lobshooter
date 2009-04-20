@@ -13,7 +13,7 @@
 //  08.12.2004 removed old OCI functions
 //  23.01.2007 usage
 //  06.06.2007 Logging
-//  07.06.2007 Multifile-Support (experimental)
+//  20.04.2009 Char Set stuff
 // ************************************************
 
 //  ************************************************
@@ -43,7 +43,7 @@
  * oraload comes with a library (libloadutil) and the main program.
  * For the moment oraload is a command line utility, that takes parameters like this
  *
- * oraload [-v] user pass db DC|UC|DB|UB SqlString [-m|-ml] filename[,file2,...] [options]
+ * oraload [-v] user pass db DC|UC|DB|UB SqlString filename[,file2,...] [options]
  *
  *
  *  , where 
@@ -61,9 +61,8 @@
  * 
  *  Options
  *  - -l logfile_name => path to the file where oraload should put the logging infos.
+ *  - -c char set => assign a Char Set when dealing with Char Lobs. (available sets, see in Oracle Globalization Support Guide, Appendix A)
  *  - -v show version number
- *  - -m filename [,file2,...] multifile support
- *  - -ml filename => in this case filename holds a simple list of files to be processed
  *
  * \section Download
  * Download from 
@@ -106,11 +105,7 @@
  *   need that when downloading.
  * 
  * Example with EasyConnect (e.g. if you have InstantClient and no TNSNAMES.ora)
- * - oraload hr hr //lynx:1521/xe DC "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt
- *
- * \subsection Using Using the library
- * You can use the library to implement in your own programs. A good starting point is the test-directory
- * with the unit test sources. For a better understanding of classes and methods continue reading this documentation 
+ * - oraload hr hr //lynx:1521/xe DCB "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt
  *
  */
 
@@ -125,11 +120,10 @@ using namespace std;
 #include "CharLob.hpp"
 #include "BinLob.hpp"
 #include "Log.hpp"
-#include "Lua.hpp"
 
 using namespace oracle::occi;
 
-static string const VERSION("0.2");
+static string const VERSION("0.2.1");
 static string vLogFile("oraload.log");
 static string vCharSet("UTF8");
 
@@ -140,16 +134,13 @@ void Version(){
 }
 
 void Usage(char* vProg){
- cout << "Usage: " << vProg << " oraload [-v] user pass db DC|UC|DB|UB SqlString [-m|-ml] filename[,file2,...] [options]" << endl;
+ cout << "Usage: " << vProg << " oraload [-v] user pass db DC|UC|DB|UB SqlString filename[,file2,...] [options]" << endl;
  cout << "                  " << " DC:Download Clob     UC:Upload Clob" << endl;
  cout << "                  " << " DB:Download Blob     UB:Upload Blob" << endl;
  cout << "Options: " << endl;
  cout << "-l  logfile_name     Assign Log File Name (default /tmp/oraload.log) " << endl;
  cout << "-c  CharSet          Assign CharSet for CharLobs (default UTF8) " << endl;
  cout << "-v                   Show version number " << endl;
- cout << "-m /ml               not working yet " << endl;
- //cout << "-m  filename [,file2,...] multifile support" << endl;
- //cout << "-ml filename => in this case filename holds a simple list of files to be processed" << endl;
  }
 
 int main(int argc, char *argv[])
@@ -165,17 +156,6 @@ int main(int argc, char *argv[])
     return (-1);
   }
 
-  if ((strcmp(argv[6],"-m") == 0 || strcmp(argv[6],"-ml") == 0))  {
-  	// Multifile Support
-  	multifile = 1;
-    Lua LuaInterpretor;
-    LuaInterpretor.init();
-    int rc = LuaInterpretor.do_file("/usr/local/lib/multifile.lua");
-    LuaInterpretor.close();
-    cout << "RC" << rc << endl;;
-    return (0);
-  }
-     
   char* option;
   if(argc>7) {
     for(int i=7;i<argc;i++) {
@@ -188,6 +168,7 @@ int main(int argc, char *argv[])
           return (-1);
         }
         vLogFile.assign(argv[i]);
+	cout << "Logfile set to " <<  vLogFile << endl;
       }
       if(!strcmp(option,"-c")){
         // Assign different CharSet to char lob
@@ -197,19 +178,10 @@ int main(int argc, char *argv[])
           return (-1);
         }
         vCharSet.assign(argv[i]);
-      }
-      else if(!strcmp(option,"-h")) {
-        Usage(argv[0]);
-        return (1);
-      }
-      else {
-        Usage(argv[0]);
-        return (1);
+	cout << "Charset set to " <<  vCharSet << endl;
       }
     }
   }
-
-    
   CharLob *CL;
   BinLob  *BL;
 
@@ -222,11 +194,11 @@ int main(int argc, char *argv[])
     if ( CL->connect() == 0 ){
       CL->setFilename(argv[6]);
       CL->setSqlLocator(argv[5]);
-	}
-	else{  // couldn't connect, returning -9
-		return (-9);
-	}
-	
+    }
+    else{  // couldn't connect, returning -9
+	CL->WriteLogFile("Connection failed, invalid login?");
+	return (-9);
+    }
   }
   if ( (strcmp(argv[4],"UB") == 0) || (strcmp(argv[4],"DB") == 0) ){
 
@@ -238,10 +210,10 @@ int main(int argc, char *argv[])
        BL->setFilename(argv[6]);
        BL->setSqlLocator(argv[5]);
     }
-	else{  // couldn't connect, returning -9
-		return (-9);
-	}
-	
+    else{  // couldn't connect, returning -9
+	BL->WriteLogFile("Connection failed, invalid login?");
+	return (-9);
+    }
   }
 
   // Upload of CharData
@@ -260,8 +232,5 @@ int main(int argc, char *argv[])
   if (strcmp(argv[4],"DB") == 0){
     BL->DownloadBlobData();
   }
-
-
   return 0;
-
 }

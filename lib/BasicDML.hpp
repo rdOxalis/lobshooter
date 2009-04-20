@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <cstdio>
+#include <cstring>
 #include <occi.h>
 using namespace oracle::occi;
 using namespace std;

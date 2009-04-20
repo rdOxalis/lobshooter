@@ -29,9 +29,11 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td></td></tr>
 <tr><td colspan="2"><br><h2>Functions</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">static string const&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#3981b8f83301bbf1ed4f71a8063051b5">VERSION</a> (&quot;0.1.4.2&quot;)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">static string const&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#eb3a96757446822498f444878562a711">VERSION</a> (&quot;0.2.1&quot;)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">static string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#275db914249eb74e4847d10b4809ed5d">vLogFile</a> (&quot;oraload.log&quot;)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">static string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a32d5108ddb8ce79e8d6067aea8eba1a">vCharSet</a> (&quot;UTF8&quot;)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#d827984c977cbf89bbdac5f856d53efd">Version</a> ()</td></tr>
 
@@ -40,20 +42,6 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 
 <tr><td colspan="2"><br><h2>Variables</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">static OCIEnv *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#8e43a756e5918969701718116288c6e2">envhp</a></td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">static OCIError *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ed37b05f5fa0d5d71cd0ff3dff611e8c">errhp</a></td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">static OCIServer *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#e2168c82443c0e38551b344cd0feb43f">srvhp</a></td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">static OCISvcCtx *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#e8e6f194dcc926e89d7a4beba056e883">svchp</a></td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">static OCISession *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#71a70be7463137720a406cbf43ef970d">authp</a> = (OCISession *) 0</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">static OCIStmt *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aed667768aea3e028c8373d9a9c081c5">stmthp</a></td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">static sword&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#0a3727ca934dc7658beddcc9c81175ca">rc</a></td></tr>
-
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#5fe46ece6b08dafee1792206dd2a5e74">multifile</a> = 0</td></tr>
 
 </table>
@@ -107,6 +95,26 @@
 
 </div>
 </div><p>
+<a class="anchor" name="a32d5108ddb8ce79e8d6067aea8eba1a"></a><!-- doxytag: member="main.cpp::vCharSet" ref="a32d5108ddb8ce79e8d6067aea8eba1a" args="(&quot;UTF8&quot;)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static string vCharSet           </td>
+          <td>(</td>
+          <td class="paramtype">&quot;UTF8&quot;&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+</div>
+</div><p>
 <a class="anchor" name="d827984c977cbf89bbdac5f856d53efd"></a><!-- doxytag: member="main.cpp::Version" ref="d827984c977cbf89bbdac5f856d53efd" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -123,18 +131,17 @@
 <div class="memdoc">
 
 <p>
-gets local time. <dl class="return" compact><dt><b>Returns:</b></dt><dd>calculated time as String Object (dd.mm.yyyy) </dd></dl>
 
 </div>
 </div><p>
-<a class="anchor" name="3981b8f83301bbf1ed4f71a8063051b5"></a><!-- doxytag: member="main.cpp::VERSION" ref="3981b8f83301bbf1ed4f71a8063051b5" args="(&quot;0.1.4.2&quot;)" -->
+<a class="anchor" name="eb3a96757446822498f444878562a711"></a><!-- doxytag: member="main.cpp::VERSION" ref="eb3a96757446822498f444878562a711" args="(&quot;0.2.1&quot;)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">static string const VERSION           </td>
           <td>(</td>
-          <td class="paramtype">&quot;0.1.4.2&quot;&nbsp;</td>
+          <td class="paramtype">&quot;0.2.1&quot;&nbsp;</td>
           <td class="paramname">          </td>
           <td>&nbsp;)&nbsp;</td>
           <td width="100%"><code> [static]</code></td>
@@ -168,51 +175,6 @@ gets local time. <dl class="return" compact><dt><b>Returns:</b></dt><dd>calculat
 </div>
 </div><p>
 <hr><h2>Variable Documentation</h2>
-<a class="anchor" name="71a70be7463137720a406cbf43ef970d"></a><!-- doxytag: member="main.cpp::authp" ref="71a70be7463137720a406cbf43ef970d" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">OCISession* <a class="el" href="main_8cpp.html#71a70be7463137720a406cbf43ef970d">authp</a> = (OCISession *) 0<code> [static]</code>          </td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-
-</div>
-</div><p>
-<a class="anchor" name="8e43a756e5918969701718116288c6e2"></a><!-- doxytag: member="main.cpp::envhp" ref="8e43a756e5918969701718116288c6e2" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">OCIEnv* <a class="el" href="main_8cpp.html#8e43a756e5918969701718116288c6e2">envhp</a><code> [static]</code>          </td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-
-</div>
-</div><p>
-<a class="anchor" name="ed37b05f5fa0d5d71cd0ff3dff611e8c"></a><!-- doxytag: member="main.cpp::errhp" ref="ed37b05f5fa0d5d71cd0ff3dff611e8c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">OCIError* <a class="el" href="main_8cpp.html#ed37b05f5fa0d5d71cd0ff3dff611e8c">errhp</a><code> [static]</code>          </td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-
-</div>
-</div><p>
 <a class="anchor" name="5fe46ece6b08dafee1792206dd2a5e74"></a><!-- doxytag: member="main.cpp::multifile" ref="5fe46ece6b08dafee1792206dd2a5e74" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -228,67 +190,7 @@ gets local time. <dl class="return" compact><dt><b>Returns:</b></dt><dd>calculat
 
 </div>
 </div><p>
-<a class="anchor" name="0a3727ca934dc7658beddcc9c81175ca"></a><!-- doxytag: member="main.cpp::rc" ref="0a3727ca934dc7658beddcc9c81175ca" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sword <a class="el" href="main_8cpp.html#0a3727ca934dc7658beddcc9c81175ca">rc</a><code> [static]</code>          </td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-
-</div>
-</div><p>
-<a class="anchor" name="e2168c82443c0e38551b344cd0feb43f"></a><!-- doxytag: member="main.cpp::srvhp" ref="e2168c82443c0e38551b344cd0feb43f" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">OCIServer* <a class="el" href="main_8cpp.html#e2168c82443c0e38551b344cd0feb43f">srvhp</a><code> [static]</code>          </td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-
-</div>
-</div><p>
-<a class="anchor" name="aed667768aea3e028c8373d9a9c081c5"></a><!-- doxytag: member="main.cpp::stmthp" ref="aed667768aea3e028c8373d9a9c081c5" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">OCIStmt* <a class="el" href="main_8cpp.html#aed667768aea3e028c8373d9a9c081c5">stmthp</a><code> [static]</code>          </td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-
-</div>
-</div><p>
-<a class="anchor" name="e8e6f194dcc926e89d7a4beba056e883"></a><!-- doxytag: member="main.cpp::svchp" ref="e8e6f194dcc926e89d7a4beba056e883" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">OCISvcCtx* <a class="el" href="main_8cpp.html#e8e6f194dcc926e89d7a4beba056e883">svchp</a><code> [static]</code>          </td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-
-</div>
-</div><p>
-<hr size="1"><address style="align: right;"><small>Generated on Wed Jun 6 12:12:55 2007 for LobShooter for Oracle (oraload) by&nbsp;
+<hr size="1"><address style="align: right;"><small>Generated on Mon Apr 20 15:04:34 2009 for LobShooter for Oracle (oraload) by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.1 </small></address>
 </body>
