@@ -1,5 +1,4 @@
 #include <QtGui>
-
 #include "LobWizard.h"
 
 LobWizard::LobWizard(QWidget *parent)

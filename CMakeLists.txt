@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.3)
+cmake_minimum_required(VERSION 2.4)
 set(ORACLE_HOME $ENV{ORACLE_HOME})
 project(oraload)
 add_subdirectory(lib)
