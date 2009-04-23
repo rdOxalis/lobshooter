@@ -1,4 +1,8 @@
 find_package(Qt4 REQUIRED)
+include_directories(${CMAKE_SOURCE_DIR}/lib)
+include_directories(${ORACLE_HOME}/rdbms/public)
+include_directories(${ORACLE_HOME}/sdk/include)
+include_directories(${ORACLE_HOME}/rdbms/public)
 include(${QT_USE_FILE})
 set(LobSrcs LobWizard.cpp)
 set(LobMocSrcs LobWizard.h)
