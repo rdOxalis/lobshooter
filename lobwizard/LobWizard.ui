@@ -1,90 +1,168 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>LobWizard</class>
- <widget class="QWizard" name="LobWizard" >
-  <property name="geometry" >
+ <widget class="QWizard" name="LobWizard">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
-    <height>377</height>
+    <width>772</width>
+    <height>375</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>LobWizard</string>
   </property>
-  <property name="wizardStyle" >
+  <property name="wizardStyle">
    <enum>QWizard::MacStyle</enum>
   </property>
-  <widget class="QWizardPage" name="wizardPage1" >
-   <layout class="QVBoxLayout" name="verticalLayout" >
+  <widget class="QWizardPage" name="wizardPage1">
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>130</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>170</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>200</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>10</y>
+      <width>440</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="0" column="0">
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Filename</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Charset</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="1">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QLineEdit" name="filenameEdit">
+           <property name="minimumSize">
+            <size>
+             <width>261</width>
+             <height>22</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="charsetEdit">
+           <property name="minimumSize">
+            <size>
+             <width>261</width>
+             <height>22</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QToolButton" name="openButton">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="BinaryCheckBox">
+         <property name="text">
+          <string>Binary</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QRadioButton" name="UploadRadioButton">
+         <property name="text">
+          <string>Upload</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="DownloadRadioButton">
+         <property name="text">
+          <string>Download</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWizardPage" name="wizardPage2">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" >
-      <item>
-       <widget class="QLabel" name="label" >
-        <property name="text" >
-         <string>Filename</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit" />
-      </item>
-      <item>
-       <widget class="QToolButton" name="toolButton" >
-        <property name="text" >
-         <string>...</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="BinaryCheckBox" >
-        <property name="text" >
-         <string>Binary</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QTextEdit" name="SqlTextEdit"/>
     </item>
     <item>
-     <widget class="QRadioButton" name="UploadRadioButton" >
-      <property name="text" >
-       <string>Upload</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="DownloadRadioButton" >
-      <property name="text" >
-       <string>Download</string>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>SQL</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="wizardPage2" >
-   <layout class="QVBoxLayout" name="verticalLayout_2" >
-    <item>
-     <layout class="QFormLayout" name="formLayout" >
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label_2" >
-        <property name="text" >
-         <string>SQL</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" >
-       <widget class="QTextEdit" name="SqlTextEdit" />
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWizardPage" name="wizardPage3" />
+  <widget class="QWizardPage" name="wizardPage3"/>
  </widget>
  <tabstops>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>toolButton</tabstop>
+  <tabstop>filenameEdit</tabstop>
+  <tabstop>openButton</tabstop>
   <tabstop>BinaryCheckBox</tabstop>
+  <tabstop>charsetEdit</tabstop>
   <tabstop>UploadRadioButton</tabstop>
   <tabstop>DownloadRadioButton</tabstop>
   <tabstop>SqlTextEdit</tabstop>
