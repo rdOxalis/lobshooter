@@ -17,85 +17,101 @@
    <enum>QWizard::MacStyle</enum>
   </property>
   <widget class="QWizardPage" name="wizardPage1">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>130</y>
-      <width>113</width>
-      <height>22</height>
+      <x>25</x>
+      <y>11</y>
+      <width>450</width>
+      <height>211</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>170</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>200</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>23</x>
-      <y>10</y>
-      <width>440</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <layout class="QFormLayout" name="formLayout_2">
+    <layout class="QFormLayout" name="formLayout_3">
      <item row="0" column="0">
-      <layout class="QFormLayout" name="formLayout">
+      <layout class="QFormLayout" name="formLayout_2">
        <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Filename</string>
-           </property>
-          </widget>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Filename</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Charset</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Charset</string>
-           </property>
-          </widget>
+         <item row="0" column="1">
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QLineEdit" name="filenameEdit">
+             <property name="minimumSize">
+              <size>
+               <width>261</width>
+               <height>22</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="charsetEdit">
+             <property name="minimumSize">
+              <size>
+               <width>261</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>UTF8</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
        <item row="0" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLineEdit" name="filenameEdit">
-           <property name="minimumSize">
-            <size>
-             <width>261</width>
-             <height>22</height>
-            </size>
+          <widget class="QToolButton" name="openButton">
+           <property name="text">
+            <string>...</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="charsetEdit">
-           <property name="minimumSize">
-            <size>
-             <width>261</width>
-             <height>22</height>
-            </size>
+          <widget class="QCheckBox" name="BinaryCheckBox">
+           <property name="text">
+            <string>Binary</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="1">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QRadioButton" name="UploadRadioButton">
+           <property name="text">
+            <string>Upload</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="DownloadRadioButton">
+           <property name="text">
+            <string>Download</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -103,39 +119,54 @@
        </item>
       </layout>
      </item>
-     <item row="0" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QToolButton" name="openButton">
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>...</string>
+          <string>User</string>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QCheckBox" name="BinaryCheckBox">
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>28</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="userEdit"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>Binary</string>
+          <string>Password</string>
          </property>
         </widget>
        </item>
-      </layout>
-     </item>
-     <item row="1" column="1">
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="QRadioButton" name="UploadRadioButton">
-         <property name="text">
-          <string>Upload</string>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="passEdit">
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QRadioButton" name="DownloadRadioButton">
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>Download</string>
+          <string>Connection</string>
          </property>
         </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="connectionEdit"/>
        </item>
       </layout>
      </item>

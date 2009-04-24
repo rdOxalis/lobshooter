@@ -124,7 +124,7 @@ using namespace std;
 
 using namespace oracle::occi;
 
-static string const VERSION("0.2.1");
+static string const VERSION("0.2.2");
 static string vLogFile("oraload.log");
 static string vCharSet("UTF8");
 
@@ -146,10 +146,18 @@ void Usage(char* vProg){
 
 int main(int argc, char *argv[])
 {
+  
+  if ( argc == 1 ) {
+    Usage(argv[0]);
+    return (-1);
+  }
+
   if ( strcmp(argv[1],"-gui") == 0 ){
 	QApplication app(argc, argv);
     LobWizard *wiz = new LobWizard;
     wiz->show();
+	wiz->setWindowState(Qt::WindowActive);
+	wiz->raise();
 	
     return app.exec();
 
@@ -165,6 +173,7 @@ int main(int argc, char *argv[])
     return (-1);
   }
 
+   
   char* option;
   if(argc>7) {
     for(int i=7;i<argc;i++) {

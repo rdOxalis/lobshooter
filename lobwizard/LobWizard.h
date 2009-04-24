@@ -31,7 +31,8 @@ public:
 
 private slots:
 	void open();
-	void on_toolButton_clicked();										
+	void on_openButton_clicked();
+	void accept();										
 };
 
 
