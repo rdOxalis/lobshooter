@@ -21,6 +21,7 @@
 #include "BinLob.hpp"
 #include "Log.hpp"
 #include "BasicDML.hpp"
+#include "Connection.hpp"
 
 class LobWizard : public QWizard, public Ui::LobWizard
 {
@@ -32,7 +33,8 @@ public:
 private slots:
 	void open();
 	void on_openButton_clicked();
-	void accept();										
+	void accept();		
+	void connect();
 };
 
 

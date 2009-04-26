@@ -32,10 +32,14 @@ void LobWizard::open()
     this->filenameEdit->setText( QFileDialog::getOpenFileName(this,tr("Choose File Location"),"/",tr("Alle *")) );
 }
 
+void LobWizard::connect()
+{
+    cout << "Connect" << endl;
+}
 void LobWizard::accept()
 {
-    string fileStr;
-    string charStr;
+        string fileStr;
+        string charStr;
 	string binStr;
 	string loadStr;
 	string userStr;
@@ -62,10 +66,10 @@ void LobWizard::accept()
 	{
 	   loadStr = "D";
 	}   
-    userStr =  this->userEdit->text().toStdString();
+	userStr =  this->userEdit->text().toStdString();
 	passStr =  this->passEdit->text().toStdString();
 	dbStr   =  this->connectionEdit->text().toStdString();
-    sqlStr  =  this->SqlTextEdit->toPlainText().toStdString();
+        sqlStr  =  this->SqlTextEdit->toPlainText().toStdString();
 	cout << "Filename " <<  fileStr           << endl;
 	cout << "Charset "  <<  charStr           << endl;
 	cout << "Load "     <<  loadStr << binStr << endl;

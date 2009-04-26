@@ -1,3 +1,6 @@
+# Qt 4.5 is required, make sure that at least 4.5 is installed
+# via "qmake -v".
+# find_package(Qt4) looks for qmake in the system path
 find_package(Qt4 REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${ORACLE_HOME}/rdbms/public)
