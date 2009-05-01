@@ -23,7 +23,7 @@
 #include "BasicDML.hpp"
 #include "Connection.hpp"
 
-class LobWizard : public QWizard, public Ui::LobWizard
+class LobWizard : public QWizard, public Ui::LobWizard, public Conn 
 {
     Q_OBJECT
 	
@@ -33,8 +33,9 @@ public:
 private slots:
 	void open();
 	void on_openButton_clicked();
+	void on_connectButton_clicked();
 	void accept();		
-	void connect();
+	void lw_connect();
 };
 
 

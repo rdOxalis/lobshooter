@@ -70,7 +70,12 @@ class CharLob:public Lob
   */
   CharLob (char* user , char* pass , char* db);
   /*!  Def Constructor
-  */  
+  */
+  /*!  Constructor
+   * 
+   * @param connection     name of a formerly built connection
+  */
+  CharLob (oracle::occi::Connection* p_connection);
   ~CharLob ();
   /*!  DownloadBlob
    * Download it

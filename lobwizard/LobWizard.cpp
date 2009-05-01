@@ -19,6 +19,7 @@ LobWizard::LobWizard(QWidget *parent)
     : QWizard(parent)
 {
     setupUi(this);
+    this->Log::setLogFile("LobWizard.log");
 	//connect(toolButton, SIGNAL(clicked()), this, SLOT(open()));
 }
 
@@ -32,9 +33,20 @@ void LobWizard::open()
     this->filenameEdit->setText( QFileDialog::getOpenFileName(this,tr("Choose File Location"),"/",tr("Alle *")) );
 }
 
-void LobWizard::connect()
+void LobWizard::lw_connect()
 {
-    cout << "Connect" << endl;
+    this->Conn::setUsername(this->userEdit->text().toStdString());
+    this->Conn::setPassword(this->passEdit->text().toStdString());
+    this->Conn::setUrl(this->connectionEdit->text().toStdString());
+    if ( this->Conn::connect() == 0 ) 
+    {
+	cout << "Connected" << endl;
+    }
+    else
+    {  
+	//c->WriteLogFile("Connection failed, invalid login?");
+	cout << "Connection failed, invalid login?" << endl;
+    }
 }
 void LobWizard::accept()
 {
@@ -42,9 +54,6 @@ void LobWizard::accept()
         string charStr;
 	string binStr;
 	string loadStr;
-	string userStr;
-	string passStr;
-	string dbStr;
 	string sqlStr;
 	
 	fileStr = this->filenameEdit->text().toStdString();
@@ -53,10 +62,27 @@ void LobWizard::accept()
 	if ( this->BinaryCheckBox->isChecked() )
 	{
 	   binStr = "B" ;
+	   BinLob *BL;
+	   BL = new BinLob(this->conn);
+	   BL->setLogFile("BLob.log");
+	   BL->FlushLogFile();
+	   BL->WriteLogFile("BinLob");
+	   BL->setFilename(fileStr);
+	   BL->setSqlLocator(sqlStr);
+	   BL->DownloadBlobData();
 	}   
 	else
 	{
 	   binStr = "C" ;
+	   CharLob *CL;
+	   CL = new CharLob(this->conn);
+	   CL->setLogFile("CLob.log");
+	   CL->FlushLogFile();
+	   CL->WriteLogFile("CharLob");
+	   CL->setFilename(fileStr);
+	   CL->setCharSet(charStr);
+	   CL->setSqlLocator(sqlStr);
+	   CL->DownloadClobData();
 	}
 	if ( this->UploadRadioButton->isChecked() )
 	{
@@ -66,16 +92,15 @@ void LobWizard::accept()
 	{
 	   loadStr = "D";
 	}   
-	userStr =  this->userEdit->text().toStdString();
-	passStr =  this->passEdit->text().toStdString();
-	dbStr   =  this->connectionEdit->text().toStdString();
         sqlStr  =  this->SqlTextEdit->toPlainText().toStdString();
 	cout << "Filename " <<  fileStr           << endl;
 	cout << "Charset "  <<  charStr           << endl;
 	cout << "Load "     <<  loadStr << binStr << endl;
-	cout << "User "     <<  userStr  << endl;
-	cout << "Pass "     <<  passStr  << endl;
-	cout << "Db "       <<  dbStr << endl;
 	cout << "SQL "      <<  sqlStr << endl;
-	QDialog::accept();
+        QDialog::accept();
+	
+}
+void LobWizard::on_connectButton_clicked()
+{
+	this->lw_connect();
 }

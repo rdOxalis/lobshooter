@@ -30,7 +30,7 @@ class Conn:public Log
   string username;
   string password;
   string url;
-  Connection *conn;   // The connection
+  oracle::occi::Connection *conn;   // The connection
 
   public:
   Conn ();

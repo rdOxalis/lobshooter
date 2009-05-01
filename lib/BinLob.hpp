@@ -54,7 +54,12 @@ class  BinLob:public Lob
    * @param pass     password of the database user
    * @param db       The database alias from tnsnames
   */
-    BinLob (char* user , char* pass , char* db);
+  BinLob (char* user , char* pass , char* db);
+  /*!  Constructor
+   * 
+   * @param connection     name of a formerly built connection
+  */
+  BinLob (oracle::occi::Connection* p_connection);
   /*!  Def Destructor
   */
   ~BinLob();

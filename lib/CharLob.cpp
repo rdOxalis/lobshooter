@@ -38,6 +38,11 @@ CharLob::CharLob (char* user , char* pass , char* db)
    url = db;
 }
 
+CharLob::CharLob (oracle::occi::Connection* p_connection)
+{
+   Conn::conn = p_connection;
+}
+
 CharLob::~CharLob ()
 {
    cout << "Destroy";

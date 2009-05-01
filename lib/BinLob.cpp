@@ -39,6 +39,11 @@ BinLob::BinLob (char* user , char* pass , char* db)
    url = db;
 }
 
+BinLob::BinLob (oracle::occi::Connection* p_connection)
+{
+   Conn::conn = p_connection;
+}
+
 BinLob::~BinLob ()
 {
    cout << "Destroy";
