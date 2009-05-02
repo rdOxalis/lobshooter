@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
   if ( (strcmp(argv[4],"UC") == 0) || (strcmp(argv[4],"DC") == 0) ){
     CL = new CharLob(argv[1],argv[2],argv[3]);
     CL->setCharSet(vCharSet);
-  	CL->setLogFile(vLogFile);
+    CL->setLogFile(vLogFile);
     CL->FlushLogFile();
     CL->WriteLogFile(argv[0]);
     if ( CL->connect() == 0 ){
@@ -221,7 +221,7 @@ int main(int argc, char *argv[])
   if ( (strcmp(argv[4],"UB") == 0) || (strcmp(argv[4],"DB") == 0) ){
 
     BL = new BinLob(argv[1],argv[2],argv[3]);
-  	BL->setLogFile(vLogFile);
+    BL->setLogFile(vLogFile);
     BL->FlushLogFile();
     BL->WriteLogFile(argv[0]);
     if ( BL->connect() == 0 ) {

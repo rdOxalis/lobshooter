@@ -19,8 +19,17 @@ LobWizard::LobWizard(QWidget *parent)
     : QWizard(parent)
 {
     setupUi(this);
-    this->Log::setLogFile("LobWizard.log");
-	//connect(toolButton, SIGNAL(clicked()), this, SLOT(open()));
+    this->logfile = "LobWizard.log";
+    this->Log::setLogFile(logfile);
+    
+    // Test only!
+    this->userEdit->setText("ftxpress");
+    this->passEdit->setText("ftxpress");
+    this->connectionEdit->setText("//pEL5:1522/panorpa");
+    this->filenameEdit->setText("test.txt");
+    this->SqlTextEdit->setText("select text from test_lob where id = 1");
+    this->charsetEdit->setText("WE8ISO8859P15");
+    //connect(toolButton, SIGNAL(clicked()), this, SLOT(open()));
 }
 
 void LobWizard::on_openButton_clicked()
@@ -35,17 +44,20 @@ void LobWizard::open()
 
 void LobWizard::lw_connect()
 {
-    this->Conn::setUsername(this->userEdit->text().toStdString());
-    this->Conn::setPassword(this->passEdit->text().toStdString());
-    this->Conn::setUrl(this->connectionEdit->text().toStdString());
-    if ( this->Conn::connect() == 0 ) 
+    this->BasicDML::setUsername(this->userEdit->text().toStdString());
+    this->BasicDML::setPassword(this->passEdit->text().toStdString());
+    this->BasicDML::setUrl(this->connectionEdit->text().toStdString());
+    if ( this->BasicDML::connect() == 0 ) 
     {
+	this->Log::WriteLogFile("Connected");
 	cout << "Connected" << endl;
+        this->connectedLabel->setText("Connected !");
+	this->next();
     }
     else
     {  
-	//c->WriteLogFile("Connection failed, invalid login?");
-	cout << "Connection failed, invalid login?" << endl;
+	this->Log::WriteLogFile("Connection failed, invalid login?");
+	cout << "Connection failed" << endl;
     }
 }
 void LobWizard::accept()
@@ -55,34 +67,31 @@ void LobWizard::accept()
 	string binStr;
 	string loadStr;
 	string sqlStr;
+	BinLob *BL;
+	CharLob *CL;
 	
 	fileStr = this->filenameEdit->text().toStdString();
 	charStr = this->charsetEdit->text().toStdString();
+        sqlStr  =  this->SqlTextEdit->toPlainText().toStdString();
 	
 	if ( this->BinaryCheckBox->isChecked() )
 	{
 	   binStr = "B" ;
-	   BinLob *BL;
-	   BL = new BinLob(this->conn);
-	   BL->setLogFile("BLob.log");
-	   BL->FlushLogFile();
+	   BL = new BinLob(this->conn, this->env);
+	   BL->setLogFile(this->logfile);
 	   BL->WriteLogFile("BinLob");
 	   BL->setFilename(fileStr);
 	   BL->setSqlLocator(sqlStr);
-	   BL->DownloadBlobData();
 	}   
 	else
 	{
 	   binStr = "C" ;
-	   CharLob *CL;
-	   CL = new CharLob(this->conn);
-	   CL->setLogFile("CLob.log");
-	   CL->FlushLogFile();
+	   CL = new CharLob(this->conn, this->env);
+	   CL->setLogFile(this->logfile);
 	   CL->WriteLogFile("CharLob");
 	   CL->setFilename(fileStr);
 	   CL->setCharSet(charStr);
 	   CL->setSqlLocator(sqlStr);
-	   CL->DownloadClobData();
 	}
 	if ( this->UploadRadioButton->isChecked() )
 	{
@@ -92,13 +101,27 @@ void LobWizard::accept()
 	{
 	   loadStr = "D";
 	}   
-        sqlStr  =  this->SqlTextEdit->toPlainText().toStdString();
-	cout << "Filename " <<  fileStr           << endl;
-	cout << "Charset "  <<  charStr           << endl;
-	cout << "Load "     <<  loadStr << binStr << endl;
-	cout << "SQL "      <<  sqlStr << endl;
+        loadStr.append(binStr);
+	if (loadStr == "UC")
+	  CL->UploadClobData();
+	if (loadStr == "DC")
+	  CL->DownloadClobData();
+	if (loadStr == "UB")
+	  BL->UploadBlobData();
+	if (loadStr == "DB")
+	  BL->DownloadBlobData();
+        
+	//cout << "Filename " <<  fileStr           << endl;
+	//cout << "Charset "  <<  charStr           << endl;
+	//cout << "Load "     <<  loadStr           << endl;
+	//cout << "SQL "      <<  sqlStr            << endl;
         QDialog::accept();
 	
+}
+void LobWizard::next()
+{
+  cout << "Page " << this->currentId();
+  QWizard::next();
 }
 void LobWizard::on_connectButton_clicked()
 {

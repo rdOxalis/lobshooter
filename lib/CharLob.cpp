@@ -38,9 +38,10 @@ CharLob::CharLob (char* user , char* pass , char* db)
    url = db;
 }
 
-CharLob::CharLob (oracle::occi::Connection* p_connection)
+CharLob::CharLob (oracle::occi::Connection* p_connection, oracle::occi::Environment* p_env)
 {
    Conn::conn = p_connection;
+   Conn::env  = p_env;
 }
 
 CharLob::~CharLob ()

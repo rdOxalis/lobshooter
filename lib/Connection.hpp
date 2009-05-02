@@ -31,6 +31,7 @@ class Conn:public Log
   string password;
   string url;
   oracle::occi::Connection *conn;   // The connection
+  oracle::occi::Environment *env;   // The Oracle environment 
 
   public:
   Conn ();

@@ -74,8 +74,9 @@ class CharLob:public Lob
   /*!  Constructor
    * 
    * @param connection     name of a formerly built connection
+   * @param connection     the corresponding environment
   */
-  CharLob (oracle::occi::Connection* p_connection);
+  CharLob (oracle::occi::Connection* p_connection, oracle::occi::Environment* p_env);
   ~CharLob ();
   /*!  DownloadBlob
    * Download it

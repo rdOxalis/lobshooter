@@ -23,18 +23,20 @@
 #include "BasicDML.hpp"
 #include "Connection.hpp"
 
-class LobWizard : public QWizard, public Ui::LobWizard, public Conn 
+class LobWizard : public QWizard, public Ui::LobWizard, public BasicDML 
 {
     Q_OBJECT
 	
 public:
 	LobWizard(QWidget *parent = 0);
+	string logfile;
 
 private slots:
 	void open();
 	void on_openButton_clicked();
 	void on_connectButton_clicked();
-	void accept();		
+	void accept();	
+	void next();
 	void lw_connect();
 };
 

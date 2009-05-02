@@ -39,9 +39,10 @@ BinLob::BinLob (char* user , char* pass , char* db)
    url = db;
 }
 
-BinLob::BinLob (oracle::occi::Connection* p_connection)
+BinLob::BinLob (oracle::occi::Connection* p_connection, oracle::occi::Environment* p_env)
 {
    Conn::conn = p_connection;
+   Conn::env  = p_env;
 }
 
 BinLob::~BinLob ()

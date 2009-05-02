@@ -52,7 +52,7 @@ int Log::WriteLogFile(string pLog)
     return (EXIT_FAILURE);
   }
 
-  out << GetTime() << " :: " << pLog.c_str() << "\n";
+  out << GetTime() << " :: " << pLog.c_str() << endl;;
   out.close();
   // Written? Sure?
   if (! out) {

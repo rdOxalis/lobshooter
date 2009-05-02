@@ -53,7 +53,8 @@ int Conn::connect(void)
 {
   if (this->getConnectorType() == "Oracle"){
     try{
-      Environment *env = Environment::createEnvironment (Environment::DEFAULT);
+      //Environment *env = Environment::createEnvironment (Environment::DEFAULT);
+      env = Environment::createEnvironment (Environment::DEFAULT);
       conn = env->createConnection (username, password, url);
     }
     catch(SQLException e){
