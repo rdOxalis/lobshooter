@@ -53,6 +53,88 @@ int BasicDML::InsertRow(void)
   return(0);
 }
 
+string BasicDML::getString(unsigned int bindCount)
+{
+    string ret;
+    stmt = conn->createStatement (this->sqlStmt);
+    for (unsigned int i=0;i<bindCount;i++)
+    {
+      try{
+      if ( bind_type[i] == "int" )
+        stmt->setInt(i+1 , atoi(bind[i].c_str()));
+      if ( bind_type[i] == "string" )
+        stmt->setString(i+1 , bind[i]);
+      }catch(SQLException ex)
+      {
+       cout<<"Exception thrown when binding"<<endl;
+       cout<<"Error number: "<<  ex.getErrorCode() << endl;
+       cout<<ex.getMessage() << endl;
+       this->WriteLogFile("Exception thrown when binding");
+       this->WriteLogFile(ex.getMessage());
+       return ("");
+      }  
+    }
+    ResultSet *rset = stmt->executeQuery ();
+    try{
+	    // just get the first line >(since this function is only useful for single value queries
+	    rset->next();
+	    string erg;
+	    erg = rset->getString(1);
+	    ret = erg;
+    }catch(SQLException ex)
+    {
+     cout<<"Exception thrown for displayRows"<<endl;
+     cout<<"Error number: "<<  ex.getErrorCode() << endl;
+     cout<<ex.getMessage() << endl;
+     this->WriteLogFile("Exception thrown for displayRows");
+     this->WriteLogFile(ex.getMessage());
+     return ("");
+    }
+    stmt->closeResultSet (rset);
+    conn->terminateStatement (stmt);
+    return(ret);
+}
+
+int BasicDML::getInt(unsigned int bindCount)
+{
+    int ret; 
+    stmt = conn->createStatement (sqlStmt);
+    for (unsigned int i=0;i<bindCount;i++)
+    {
+      try{
+      if ( bind_type[i] == "int" )
+        stmt->setInt(i+1 , atoi(bind[i].c_str()));
+      if ( bind_type[i] == "string" )
+        stmt->setString(i+1 , bind[i]);
+      }catch(SQLException ex)
+      {
+       cout<<"Exception thrown when binding"<<endl;
+       cout<<"Error number: "<<  ex.getErrorCode() << endl;
+       cout<<ex.getMessage() << endl;
+       this->WriteLogFile("Exception thrown when binding");
+       this->WriteLogFile(ex.getMessage());
+       return (-3);
+      }  
+    }
+    ResultSet *rset = stmt->executeQuery ();
+    try{
+	    // just get the first line >(since this function is only useful for single value queries
+	    rset->next();
+	    int erg;
+	    erg = rset->getNumber(1);
+	    ret = erg;
+    }catch(SQLException ex)
+    {
+     cout<<ex.getMessage() << endl;
+     this->WriteLogFile("Exception thrown for displayRows");
+     this->WriteLogFile(ex.getMessage());
+     return (-1);
+    }
+    stmt->closeResultSet (rset);
+    conn->terminateStatement (stmt);
+    return(ret);
+}
+
 /**
  * displaying rows from table
  * FIXME
@@ -106,7 +188,7 @@ string BasicDML::displayRows (int selectCount,unsigned int bindCount)
     conn->terminateStatement (stmt);
     return(ret);
   }
-  return(0);
+  return("");
 }
 
 

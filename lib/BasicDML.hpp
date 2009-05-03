@@ -97,6 +97,24 @@ class BasicDML:public Conn
    * 
   */
   int InsertRow(void);
+
+   /*!  getVal
+   * 
+   * gets one value from a select 
+   * 
+   * @param bindCount number of binds 
+  */
+  string getString(unsigned int bindCount);
+
+  /*!  getVal
+   * 
+   * gets one value from a select 
+   * 
+   * @param bindCount number of binds 
+  */
+  int getInt(unsigned int bindCount);
+
+  
   
   /*!  Commit
   */

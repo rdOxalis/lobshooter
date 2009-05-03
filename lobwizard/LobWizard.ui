@@ -109,7 +109,7 @@
      <rect>
       <x>30</x>
       <y>20</y>
-      <width>433</width>
+      <width>440</width>
       <height>117</height>
      </rect>
     </property>
@@ -203,6 +203,16 @@
       </layout>
      </item>
     </layout>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>111</width>
+      <height>26</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QWizardPage" name="wizardPage2">
