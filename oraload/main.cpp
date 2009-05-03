@@ -43,7 +43,7 @@
  * oraload comes with a library (libloadutil) and the main program.
  * For the moment oraload is a command line utility, that takes parameters like this
  *
- * oraload [-v] user pass db DC|UC|DB|UB SqlString filename[,file2,...] [options]
+ * oraload [-v] user pass db DC|UC|DB|UB SqlString filename [options]
  *
  *
  *  , where 
@@ -95,7 +95,6 @@
  * On runtime, set your library path like this:
  * 
  * - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib:$ORACLE_HOME/ctx/lib
- * - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib
  * - export LD_LIBRARY_PATH
  * 
  * \subsection Examples
@@ -105,7 +104,7 @@
  *   need that when downloading.
  * 
  * Example with EasyConnect (e.g. if you have InstantClient and no TNSNAMES.ora)
- * - oraload hr hr //lynx:1521/xe DCB "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt
+ * - oraload hr hr //lynx:1521/xe DB "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt
  *
  */
 
