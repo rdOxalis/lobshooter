@@ -49,21 +49,24 @@ void LobWizard::lw_connect()
     this->BasicDML::setUrl(this->connectionEdit->text().toStdString());
     if ( this->BasicDML::connect() == 0 ) 
     {
-	this->Log::WriteLogFile("Connected");
-	cout << "Connected" << endl;
-        this->connectedLabel->setText("Connected !");
-	this->next();
+	    this->Log::WriteLogFile("Connected");
+	    cout << "Connected" << endl;
+	    this->setSQLStmt("select name from v$database");
+	    string databaseSql = "Connected to ";
+	    databaseSql.append(this->getString(0));
+       this->connectedLabel->setText(databaseSql.c_str());
+	    this->next();
     }
     else
     {  
-	this->Log::WriteLogFile("Connection failed, invalid login?");
-	cout << "Connection failed" << endl;
+	    this->Log::WriteLogFile("Connection failed, invalid login?");
+	    cout << "Connection failed" << endl;
     }
 }
 void LobWizard::accept()
 {
-        string fileStr;
-        string charStr;
+   string fileStr;
+   string charStr;
 	string binStr;
 	string loadStr;
 	string sqlStr;
@@ -101,7 +104,7 @@ void LobWizard::accept()
 	{
 	   loadStr = "D";
 	}   
-        loadStr.append(binStr);
+   loadStr.append(binStr);
 	if (loadStr == "UC")
 	  CL->UploadClobData();
 	if (loadStr == "DC")
