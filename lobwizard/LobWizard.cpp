@@ -21,14 +21,26 @@ LobWizard::LobWizard(QWidget *parent)
     setupUi(this);
     this->logfile = "LobWizard.log";
     this->Log::setLogFile(logfile);
+	
+	// Versuch, die Felder in wizardPage mandatory zu setzen.
+	// Doku sagt, dass registerField mit dem Asterisk im Namen zu einem Mandatory Field führt.
+	// registerField ist aber eine protected func, daher auf dem in ui_LobWizard.h instanziierten wizardPage
+	// nicht aufrufbar. 
+	// Keine Chance entdeckt, die Felder im Designer mandatory zu setzen
+	// setProperty scheint auch keine Lösung, da beliebige Props gesetzt werden können, die aber so 
+	// noch nicht ausgewertet werden. manuelle Arbeit nötig.
+	// RAD gescheitert? 
+	//wizardPage->registerField("userEdit*", userEdit);
+	this->userEdit->setProperty("mandatoryField",true);    
     
-    // Test only!
-    this->userEdit->setText("ftxpress");
+	
+	// Test only!
+    //this->userEdit->setText("ftxpress");
     this->passEdit->setText("ftxpress");
     this->connectionEdit->setText("//pEL5:1522/panorpa");
     this->filenameEdit->setText("test.txt");
     this->SqlTextEdit->setText("select text from test_lob where id = 1");
-    this->charsetEdit->setText("WE8ISO8859P15");
+    
     //connect(toolButton, SIGNAL(clicked()), this, SLOT(open()));
 }
 
@@ -51,16 +63,19 @@ void LobWizard::lw_connect()
     {
 	    this->Log::WriteLogFile("Connected");
 	    cout << "Connected" << endl;
-	    this->setSQLStmt("select name from v$database");
+	    this->setSQLStmt("select 'Oracle Version ' || version || ', instance ' || instance_name from v$instance");
 	    string databaseSql = "Connected to ";
 	    databaseSql.append(this->getString(0));
-       this->connectedLabel->setText(databaseSql.c_str());
-	    this->next();
+        this->connectedLabel->setText(databaseSql.c_str());
+		this->setSQLStmt("select value from nls_database_parameters where parameter = 'NLS_CHARACTERSET'");
+		this->charsetEdit->setText(this->getString(0).c_str());
+	    //this->next();
     }
     else
     {  
 	    this->Log::WriteLogFile("Connection failed, invalid login?");
 	    cout << "Connection failed" << endl;
+        this->connectedLabel->setText("Login failed!");
     }
 }
 void LobWizard::accept()
@@ -121,12 +136,18 @@ void LobWizard::accept()
         QDialog::accept();
 	
 }
-void LobWizard::next()
+/*void LobWizard::next()
 {
   cout << "Page " << this->currentId();
   QWizard::next();
-}
+}*/
 void LobWizard::on_connectButton_clicked()
 {
 	this->lw_connect();
 }
+/*bool LobWizard::validatePage()
+{
+  cout << "validating page" << endl;
+  return (false);
+}*/
+

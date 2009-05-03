@@ -30,16 +30,26 @@ class LobWizard : public QWizard, public Ui::LobWizard, public BasicDML
 public:
 	LobWizard(QWidget *parent = 0);
 	string logfile;
+    //Versuch, validatePage zu überladen, soll angeblich bei Click auf Next-Button ausgelöst werden, 
+	//dies ist aber nicht so
+	//bool validatePage();
 
+protected slots:
+    //auch diese Funktion aus QWizard soll angeblich bei Drücken des Next-Buttons ziehen,
+	//ist aber auch nicht so, daher keine Chance, das Verhalten des Next-Buttons zu ändern?
+	// anders als der Virtual Slot "accept()", scheinen diese Dokumentationen falsch zu sein.
+    //void next();
+	
 private slots:
 	void open();
 	void on_openButton_clicked();
 	void on_connectButton_clicked();
-	void accept();	
-	void next();
 	void lw_connect();
-};
+	//overloaded virtual slot
+	void accept();	
 
+	
+};
 
 #endif
 
