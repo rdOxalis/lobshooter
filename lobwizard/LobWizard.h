@@ -47,6 +47,9 @@ private slots:
 	void lw_connect();
 	//overloaded virtual slot
 	void accept();	
+	QStringList users();
+	//QStringList tables(string user);
+	//QStringList columns(string user , string table); 
 
 	
 };

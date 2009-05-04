@@ -35,7 +35,7 @@ LobWizard::LobWizard(QWidget *parent)
     
 	
 	// Test only!
-    //this->userEdit->setText("ftxpress");
+    this->userEdit->setText("ftxpress");
     this->passEdit->setText("ftxpress");
     this->connectionEdit->setText("//pEL5:1522/panorpa");
     this->filenameEdit->setText("test.txt");
@@ -70,6 +70,8 @@ void LobWizard::lw_connect()
 		this->setSQLStmt("select value from nls_database_parameters where parameter = 'NLS_CHARACTERSET'");
 		this->charsetEdit->setText(this->getString(0).c_str());
 	    //this->next();
+		QStringList userList = this->users();
+		this->schemaComboBox->addItems(userList);
     }
     else
     {  
@@ -150,4 +152,14 @@ void LobWizard::on_connectButton_clicked()
   cout << "validating page" << endl;
   return (false);
 }*/
+
+QStringList LobWizard::users()
+{
+   QStringList ret;
+   this->setSQLStmt("select username from all_users order by username");
+   string userStr = this->getStringList(0);
+   cout << userStr << endl;
+   QString qUserStr = userStr.c_str();
+   return qUserStr.split(",");
+}
 

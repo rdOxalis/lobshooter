@@ -105,6 +105,7 @@ class BasicDML:public Conn
    * @param bindCount number of binds 
   */
   string getString(unsigned int bindCount);
+  string BasicDML::getStringList(unsigned int bindCount);
 
   /*!  getVal
    * 

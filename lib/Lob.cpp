@@ -13,9 +13,17 @@
 //    if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "Lob.hpp"
-int Lob::InitLob(string pField , string pTable , string pWhere){
+int Lob::InitLob(string pField , string pTable , string pWhere, string pType){
   if (this->getConnectorType() == "Oracle"){
-    string sqlStmt = "update " + pTable + " set " + pField + " = empty_blob() where " + pWhere;
+    string sqlStmt;
+    if ( pType == "Blob" )  
+      sqlStmt = "update " + pTable + " set " + pField + " = empty_blob() where " + pWhere;
+    if ( pType == "Clob" )  
+      sqlStmt = "update " + pTable + " set " + pField + " = empty_clob() where " + pWhere;
+	else {
+	  cout << "Type must be one of <Clob> or <Blob>" << endl;
+	  return (-1);  
+	}
     Statement *stmt = conn->createStatement (sqlStmt);
     try{
       stmt->executeUpdate ();

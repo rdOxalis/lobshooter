@@ -60,9 +60,10 @@ class Lob:public BasicDML
     * Initialize an empty Lob
     * 
     * @param pField      The tables attribut where the lob is
-    * @param pTable     table name
+    * @param pTable      table name
     * @param pWhere      where clause 
+	* @param pType       type of lob Clob|Blob
   */
-  int InitLob(string pField , string pTable , string pWhere);
+  int InitLob(string pField , string pTable , string pWhere, string pType);
 };
 #endif
