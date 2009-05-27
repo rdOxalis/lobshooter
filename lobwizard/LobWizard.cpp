@@ -1,5 +1,5 @@
 //    <oraload - loads and gets lobs (Large Objects) into and out of an Oracle Database> 
-//    Copyright (C) <2004-2007> <Ralf Duenkelmann>
+//    Copyright (C) <2004-2009> <Ralf Duenkelmann>
 //
 //    This library is free software; you can redistribute it and/or modify it under the terms of the 
 //    GNU Lesser General Public License as published by the Free Software Foundation; 
@@ -30,7 +30,7 @@ LobWizard::LobWizard(QWidget *parent)
 	// setProperty scheint auch keine Lösung, da beliebige Props gesetzt werden können, die aber so 
 	// noch nicht ausgewertet werden. manuelle Arbeit nötig.
 	// RAD gescheitert? 
-	//wizardPage->registerField("userEdit*", userEdit);
+	//wizardPage->registerField("*userEdit", userEdit);
 	this->userEdit->setProperty("mandatoryField",true);    
     
 	
@@ -56,93 +56,85 @@ void LobWizard::open()
 
 void LobWizard::lw_connect()
 {
-    this->BasicDML::setUsername(this->userEdit->text().toStdString());
-    this->BasicDML::setPassword(this->passEdit->text().toStdString());
-    this->BasicDML::setUrl(this->connectionEdit->text().toStdString());
-cout << "lw_connect 10" << endl;
-    if ( this->BasicDML::connect() == 0 ) 
-    {
-	this->Log::WriteLogFile("Connected");
-	cout << "Connected" << endl;
-	this->setSQLStmt("select 'Oracle Version ' || version || ', instance ' || instance_name from v$instance");
-	string databaseSql = "Connected to ";
-cout << "lw_connect 20" << endl;
-	databaseSql.append(this->getString(0));
-        this->connectedLabel->setText(databaseSql.c_str());
-	this->setSQLStmt("select value from nls_database_parameters where parameter = 'NLS_CHARACTERSET'");
-cout << "lw_connect 30" << endl;
-	this->charsetEdit->setText(this->getString(0).c_str());
-	//this->next();
-cout << "lw_connect 40" << endl;
-	QStringList userList = this->users();
-cout << "lw_connect 50" << endl;
-	this->schemaComboBox->addItems(userList);
-cout << "lw_connect 60" << endl;
+   this->BasicDML::setUsername(this->userEdit->text().toStdString());
+   this->BasicDML::setPassword(this->passEdit->text().toStdString());
+   this->BasicDML::setUrl(this->connectionEdit->text().toStdString());
+   if ( this->BasicDML::connect() == 0 ) 
+   {
+      this->Log::WriteLogFile("Connected");
+      cout << "Connected" << endl;
+      this->setSQLStmt("select 'Oracle Version ' || version || ', instance ' || instance_name from v$instance");
+      string databaseSql = "Connected to ";
+      databaseSql.append(this->getString(0));
+      this->connectedLabel->setText(databaseSql.c_str());
+      this->setSQLStmt("select value from nls_database_parameters where parameter = 'NLS_CHARACTERSET'");
+      this->charsetEdit->setText(this->getString(0).c_str());
+      //this->next();
+      QStringList userList = this->users();
+      this->schemaComboBox->addItems(userList);
     }
     else
     {
-	this->Log::WriteLogFile("Connection failed, invalid login?");
-	cout << "Connection failed" << endl;
-        this->connectedLabel->setText("Login failed!");
+      this->Log::WriteLogFile("Connection failed, invalid login?");
+      cout << "Connection failed" << endl;
+      this->connectedLabel->setText("Login failed!");
     }
 }
 void LobWizard::accept()
 {
    string fileStr;
    string charStr;
-	string binStr;
-	string loadStr;
-	string sqlStr;
-	BinLob *BL;
-	CharLob *CL;
-	
-	fileStr = this->filenameEdit->text().toStdString();
-	charStr = this->charsetEdit->text().toStdString();
-        sqlStr  =  this->SqlTextEdit->toPlainText().toStdString();
-	
-	if ( this->BinaryCheckBox->isChecked() )
-	{
-	   binStr = "B" ;
-	   BL = new BinLob(this->conn, this->env);
-	   BL->setLogFile(this->logfile);
-	   BL->WriteLogFile("BinLob");
-	   BL->setFilename(fileStr);
-	   BL->setSqlLocator(sqlStr);
-	}   
-	else
-	{
-	   binStr = "C" ;
-	   CL = new CharLob(this->conn, this->env);
-	   CL->setLogFile(this->logfile);
-	   CL->WriteLogFile("CharLob");
-	   CL->setFilename(fileStr);
-	   CL->setCharSet(charStr);
-	   CL->setSqlLocator(sqlStr);
-	}
-	if ( this->UploadRadioButton->isChecked() )
-	{
-	   loadStr = "U";
-	}   
-	if ( this->DownloadRadioButton->isChecked() )
-	{
-	   loadStr = "D";
-	}   
+   string binStr;
+   string loadStr;
+   string sqlStr;
+   BinLob *BL;
+   CharLob *CL;
+
+   fileStr = this->filenameEdit->text().toStdString();
+   charStr = this->charsetEdit->text().toStdString();
+   sqlStr  =  this->SqlTextEdit->toPlainText().toStdString();
+
+   if ( this->BinaryCheckBox->isChecked() )
+   {
+      binStr = "B" ;
+      BL = new BinLob(this->conn, this->env);
+      BL->setLogFile(this->logfile);
+      BL->WriteLogFile("BinLob");
+      BL->setFilename(fileStr);
+      BL->setSqlLocator(sqlStr);
+   }   
+   else
+   {
+      binStr = "C" ;
+      CL = new CharLob(this->conn, this->env);
+      CL->setLogFile(this->logfile);
+      CL->WriteLogFile("CharLob");
+      CL->setFilename(fileStr);
+      CL->setCharSet(charStr);
+      CL->setSqlLocator(sqlStr);
+   }
+   if ( this->UploadRadioButton->isChecked() )
+   {
+      loadStr = "U";
+   }   
+   if ( this->DownloadRadioButton->isChecked() )
+   {
+      loadStr = "D";
+   }   
    loadStr.append(binStr);
-	if (loadStr == "UC")
-	  CL->UploadClobData();
-	if (loadStr == "DC")
-	  CL->DownloadClobData();
-	if (loadStr == "UB")
-	  BL->UploadBlobData();
-	if (loadStr == "DB")
-	  BL->DownloadBlobData();
-        
-	//cout << "Filename " <<  fileStr           << endl;
-	//cout << "Charset "  <<  charStr           << endl;
-	//cout << "Load "     <<  loadStr           << endl;
-	//cout << "SQL "      <<  sqlStr            << endl;
-        QDialog::accept();
-	
+   if (loadStr == "UC")
+     CL->UploadClobData();
+   if (loadStr == "DC")
+     CL->DownloadClobData();
+   if (loadStr == "UB")
+     BL->UploadBlobData();
+   if (loadStr == "DB")
+     BL->DownloadBlobData();
+   //cout << "Filename " <<  fileStr           << endl;
+   //cout << "Charset "  <<  charStr           << endl;
+   //cout << "Load "     <<  loadStr           << endl;
+   //cout << "SQL "      <<  sqlStr            << endl;
+   QDialog::accept();
 }
 /*void LobWizard::next()
 {
@@ -163,10 +155,7 @@ QStringList LobWizard::users()
 {
    QStringList ret;
    this->setSQLStmt("select username from all_users  order by username");
-cout << "users 10" << endl;
-
    string userStr = this->getStringList(0);
-cout << "user length" << userStr.length() << endl;
    cout << userStr << endl;
    QString qUserStr = userStr.c_str();
    return qUserStr.split(",");
