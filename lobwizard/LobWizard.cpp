@@ -59,24 +59,30 @@ void LobWizard::lw_connect()
     this->BasicDML::setUsername(this->userEdit->text().toStdString());
     this->BasicDML::setPassword(this->passEdit->text().toStdString());
     this->BasicDML::setUrl(this->connectionEdit->text().toStdString());
+cout << "lw_connect 10" << endl;
     if ( this->BasicDML::connect() == 0 ) 
     {
-	    this->Log::WriteLogFile("Connected");
-	    cout << "Connected" << endl;
-	    this->setSQLStmt("select 'Oracle Version ' || version || ', instance ' || instance_name from v$instance");
-	    string databaseSql = "Connected to ";
-	    databaseSql.append(this->getString(0));
+	this->Log::WriteLogFile("Connected");
+	cout << "Connected" << endl;
+	this->setSQLStmt("select 'Oracle Version ' || version || ', instance ' || instance_name from v$instance");
+	string databaseSql = "Connected to ";
+cout << "lw_connect 20" << endl;
+	databaseSql.append(this->getString(0));
         this->connectedLabel->setText(databaseSql.c_str());
-		this->setSQLStmt("select value from nls_database_parameters where parameter = 'NLS_CHARACTERSET'");
-		this->charsetEdit->setText(this->getString(0).c_str());
-	    //this->next();
-		QStringList userList = this->users();
-		this->schemaComboBox->addItems(userList);
+	this->setSQLStmt("select value from nls_database_parameters where parameter = 'NLS_CHARACTERSET'");
+cout << "lw_connect 30" << endl;
+	this->charsetEdit->setText(this->getString(0).c_str());
+	//this->next();
+cout << "lw_connect 40" << endl;
+	QStringList userList = this->users();
+cout << "lw_connect 50" << endl;
+	this->schemaComboBox->addItems(userList);
+cout << "lw_connect 60" << endl;
     }
     else
-    {  
-	    this->Log::WriteLogFile("Connection failed, invalid login?");
-	    cout << "Connection failed" << endl;
+    {
+	this->Log::WriteLogFile("Connection failed, invalid login?");
+	cout << "Connection failed" << endl;
         this->connectedLabel->setText("Login failed!");
     }
 }
@@ -156,8 +162,11 @@ void LobWizard::on_connectButton_clicked()
 QStringList LobWizard::users()
 {
    QStringList ret;
-   this->setSQLStmt("select username from all_users order by username");
+   this->setSQLStmt("select username from all_users  order by username");
+cout << "users 10" << endl;
+
    string userStr = this->getStringList(0);
+cout << "user length" << userStr.length() << endl;
    cout << userStr << endl;
    QString qUserStr = userStr.c_str();
    return qUserStr.split(",");

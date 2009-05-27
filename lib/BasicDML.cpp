@@ -117,19 +117,21 @@ string BasicDML::getStringList(unsigned int bindCount)
       }  
     }
     ResultSet *rset = stmt->executeQuery ();
+
     try{
-	    // just get the first line >(since this function is only useful for single value queries
 	    while (rset->next())
-		{
+            {
 	      string erg;
-	      erg = rset->getString(1);
-		  if ( ret == "" )
-	        ret = erg;
-		  else{
-		    ret = ret.append(",");
-			ret = ret.append(erg);
-		  }	
-		} 
+              erg = rset->getString(1);
+cout << "getStrList " << erg << endl;
+              if ( ret == "" )
+	          ret.assign(erg);
+	      else{
+	           ret.assign(ret.append(","));
+	           ret.assign(ret.append(erg));
+              }	
+	    } 
+cout << "getStrList Ende" << endl;
 		
     }catch(SQLException ex)
     {
