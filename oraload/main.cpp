@@ -119,7 +119,7 @@ using namespace std;
 #include "CharLob.hpp"
 #include "BinLob.hpp"
 #include "Log.hpp"
-#include "LobWizard.h"
+//#include "LobWizard.h"
 
 using namespace oracle::occi;
 
@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
     return (-1);
   }
 
-  if ( strcmp(argv[1],"-gui") == 0 ){
+/*  if ( strcmp(argv[1],"-gui") == 0 ){
 	QApplication app(argc, argv);
     LobWizard *wiz = new LobWizard;
     wiz->show();
@@ -161,6 +161,7 @@ int main(int argc, char *argv[])
     return app.exec();
 
   }
+*/
   	
   if ( ( argc == 2) && (( (strcmp(argv[1],"-v") == 0) || (strcmp(argv[1],"--version") == 0) ))  ) {
     Version();

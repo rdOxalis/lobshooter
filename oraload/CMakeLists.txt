@@ -1,29 +1,10 @@
-set(DESIRED_QT_VERSION 4.5)
-find_package(Qt4 REQUIRED)
-include(${QT_USE_FILE})
-include_directories(${CMAKE_SOURCE_DIR}/lib)
-include_directories(${CMAKE_SOURCE_DIR}/lobwizard)
-include_directories(${ORACLE_HOME}/rdbms/public)
-include_directories(${ORACLE_HOME}/sdk/include)
-# InstantClient 11 Linux
-find_file(NNZ10 libnnz11.so ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-find_file(OCCI libocci.so.11.1 ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-find_file(CLNTSH libclntsh.so.11.1 ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-# InstantClient 10 Linux
-#find_file(NNZ10 libnnz10.so ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-#find_file(OCCI libocci.so.10.1 ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-#find_file(CLNTSH libclntsh.so.10.1 ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-# InstantClient 11 Mac
-#find_file(NNZ10 libnnz10.dylib ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-#find_file(OCCI libocci.dylib.10.1 ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-#find_file(CLNTSH libclntsh.dylib.10.1 ${ORACLE_HOME} ${ORACLE_HOME}/lib)
-set(libnnz ${NNZ10})
-set(libocci ${OCCI})
-set(libclntsh ${CLNTSH})
+include_directories( ${ORACLE_INCLUDES} )
+include_directories( ${CMAKE_SOURCE_DIR}/lib )
+
 set(AppSrcs main.cpp)
-cmake_policy(SET CMP0003 NEW)
-link_directories(${CMAKE_SOURCE_DIR}/lib ${CMAKE_SOURCE_DIR}/lobwizard)
+
+link_directories(${CMAKE_BINARY_DIR}/lib)
 add_executable(oraload ${AppSrcs})
-target_link_libraries(oraload loadutil lobwizard ${libnnz} ${libocci} ${libclntsh})
+target_link_libraries(oraload loadutil ${ORACLE_LIBRARIES})
 
 install(TARGETS oraload DESTINATION bin)

@@ -1,3 +1,2 @@
 /usr/local/lib/libloadutil.a
 /usr/local/bin/oraload
-/usr/local/lobwizard/liblobwizard.a

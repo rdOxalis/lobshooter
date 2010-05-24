@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 2.4)
-set(ORACLE_HOME $ENV{ORACLE_HOME})
+project(LobShooter)
+cmake_policy(SET CMP0003 NEW)
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
+
+find_package(Oracle REQUIRED OCCI CLNTSH)
+
 project(oraload)
 add_subdirectory(lib)
 add_subdirectory(oraload)
-add_subdirectory(lobwizard)
-MESSAGE("----------------------------------------------------------------------------------------------------------------------------------------------------------")
-MESSAGE("Your ORACLE_HOME is set to $ENV{ORACLE_HOME}")
-MESSAGE("Please make sure that it points to your local Oracle Installation.")
-MESSAGE("ORACLE_HOME is needed at compile time.")
 MESSAGE("----------------------------------------------------------------------------------------------------------------------------------------------------------")
 MESSAGE("Your LD_LIBRARY_PATH is set to $ENV{LD_LIBRARY_PATH}")
 MESSAGE("LD_LIBRARY_PATH is needed at runtime and should be added to your environment like this:")
