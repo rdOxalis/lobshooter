@@ -1,5 +1,5 @@
 //  ************************************************
-//  oraload
+//  lobshooter
 //  -----------
 //  Upload and Download of Lobs to an Oracle Server
 //
@@ -18,7 +18,7 @@
 
 //  ************************************************
 //
-//    <oraload - loads and gets lobs (Large Objects) into and out of an Oracle Database> 
+//    <lobshooter - loads and gets lobs (Large Objects) into and out of an Oracle Database> 
 //    Copyright (C) <2004-2007> <Ralf Duenkelmann>
 //
 //    This library is free software; you can redistribute it and/or modify it under the terms of the 
@@ -34,16 +34,16 @@
 //
 // ************************************************
    
-/*! \mainpage LobShooter for Oracle (oraload)
+/*! \mainpage LobShooter for Oracle
  *
  * \section intro_sec Introduction
  *
- * LobShooter for Oracle (oraload) is a utility to easily up- and download Lob-Files 
+ * LobShooter for Oracle (lobshooter) is a utility to easily up- and download Lob-Files 
  * to and from an Oracle database. You are able to directly load binary (blob) and char data with it.
- * oraload comes with a library (libloadutil) and the main program.
- * For the moment oraload is a command line utility, that takes parameters like this
+ * lobshooter comes with a library (libloadutil) and the main program.
+ * For the moment lobshooter is a command line utility, that takes parameters like this
  *
- * oraload [-v] user pass db DC|UC|DB|UB SqlString filename [options]
+ * lobshooter [-v] user pass db DC|UC|DB|UB SqlString filename [options]
  *
  *
  *  , where 
@@ -60,7 +60,7 @@
  *               in case you use option -ml, filename holds the list of files to be processed
  * 
  *  Options
- *  - -l logfile_name => path to the file where oraload should put the logging infos.
+ *  - -l logfile_name => path to the file where lobshooter should put the logging infos.
  *  - -c char set => assign a Char Set when dealing with Char Lobs. (available sets, see in Oracle Globalization Support Guide, Appendix A)
  *  - -v show version number
  *
@@ -98,13 +98,13 @@
  * - export LD_LIBRARY_PATH
  * 
  * \subsection Examples
- * - oraload hr hr xe UB "select blob_field from blob_table where pk_field = 4711 for update" music.mp3
+ * - lobshooter hr hr xe UB "select blob_field from blob_table where pk_field = 4711 for update" music.mp3
  *
  * - note that you always have to lock the row with "for update", if you upload something. You do not 
  *   need that when downloading.
  * 
  * Example with EasyConnect (e.g. if you have InstantClient and no TNSNAMES.ora)
- * - oraload hr hr //lynx:1521/xe DB "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt
+ * - lobshooter hr hr //lynx:1521/xe DB "select blob_field from blob_table where pk_field = 4711" music.mp3 -l ./log.txt
  *
  */
 
@@ -125,21 +125,21 @@ using namespace std;
 using namespace oracle::occi;
 
 static string const VERSION("0.2.2");
-static string vLogFile("oraload.log");
+static string vLogFile("lobshooter.log");
 static string vCharSet("UTF8");
 
 int multifile = 0;
 
 void Version(){
- cout << "oraload." << VERSION << endl;
+ cout << "lobshooter." << VERSION << endl;
 }
 
 void Usage(char* vProg){
- cout << "Usage: " << vProg << " oraload [-v] user pass db DC|UC|DB|UB SqlString filename[,file2,...] [options]" << endl;
+ cout << "Usage: " << vProg << " [-v] user pass db DC|UC|DB|UB SqlString filename[,file2,...] [options]" << endl;
  cout << "                  " << " DC:Download Clob     UC:Upload Clob" << endl;
  cout << "                  " << " DB:Download Blob     UB:Upload Blob" << endl;
  cout << "Options: " << endl;
- cout << "-l  logfile_name     Assign Log File Name (default /tmp/oraload.log) " << endl;
+ cout << "-l  logfile_name     Assign Log File Name (default /tmp/lobshooter.log) " << endl;
  cout << "-c  CharSet          Assign CharSet for CharLobs (default UTF8) " << endl;
  cout << "-v                   Show version number " << endl;
  }

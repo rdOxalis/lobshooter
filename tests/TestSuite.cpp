@@ -1,8 +1,8 @@
 #include <cppunit/extensions/HelperMacros.h>
-#include "../../oraload/lib/Connection.hpp"
-#include "../../oraload/lib/BasicDML.hpp"
-#include "../../oraload/lib/CharLob.hpp"
-#include "../../oraload/lib/BinLob.hpp"
+#include "../lib/Connection.hpp"
+#include "../lib/BasicDML.hpp"
+#include "../lib/CharLob.hpp"
+#include "../lib/BinLob.hpp"
 //#include "Misc/ParReader.hpp"
 //#include "Misc/BaseError.hpp"
 

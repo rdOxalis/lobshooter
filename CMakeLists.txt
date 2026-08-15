@@ -6,9 +6,8 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 
 find_package(Oracle REQUIRED OCCI CLNTSH)
 
-project(oraload)
 add_subdirectory(lib)
-add_subdirectory(oraload)
+add_subdirectory(lobshooter)
 MESSAGE("----------------------------------------------------------------------------------------------------------------------------------------------------------")
 MESSAGE("Your LD_LIBRARY_PATH is set to $ENV{LD_LIBRARY_PATH}")
 MESSAGE("LD_LIBRARY_PATH is needed at runtime and should be added to your environment like this:")

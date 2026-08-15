@@ -1,4 +1,4 @@
-//    <oraload - loads and gets lobs (Large Objects) into and out of an Oracle Database> 
+//    <lobshooter - loads and gets lobs (Large Objects) into and out of an Oracle Database> 
 //    Copyright (C) <2004-2007> <Ralf Duenkelmann>
 //
 //    This library is free software; you can redistribute it and/or modify it under the terms of the 
