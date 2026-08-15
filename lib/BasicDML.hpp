@@ -17,6 +17,7 @@
 #include <fstream>
 #include <cstdio>
 #include <cstring>
+#include <cstdint>   // Oracle's occiControl.h uses uint8_t without including it
 #include <occi.h>
 using namespace oracle::occi;
 using namespace std;

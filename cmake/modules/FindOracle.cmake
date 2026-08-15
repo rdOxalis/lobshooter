@@ -134,7 +134,9 @@ ENDIF (ORACLE_USE_OCIEI)
 
 MESSAGE("fer ${FORCE_ERROR}")
 IF (NOT FORCE_ERROR)
-    SET (ORACLE_LIBRARY ${ORACLE_LIBRARY_CLNTSH} ${ORACLE_LIBRARY_OCCI} ${ORACLE_LIBRARY_XML} ${ORACLE_LIBRARY_OCIEI})
+    # OCCI must precede CLNTSH: libocci depends on symbols from libclntsh, and
+    # modern linkers resolve strictly left to right (older ones did not care).
+    SET (ORACLE_LIBRARY ${ORACLE_LIBRARY_OCCI} ${ORACLE_LIBRARY_CLNTSH} ${ORACLE_LIBRARY_XML} ${ORACLE_LIBRARY_OCIEI})
 ENDIF (NOT FORCE_ERROR)
 
 

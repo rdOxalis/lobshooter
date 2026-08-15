@@ -115,6 +115,7 @@
 #include <time.h>
 using namespace std;
 
+#include <cstdint>   // Oracle's occiControl.h uses uint8_t without including it
 #include <occi.h>
 #include "CharLob.hpp"
 #include "BinLob.hpp"
