@@ -16,13 +16,13 @@
 int Lob::InitLob(string pField , string pTable , string pWhere, string pType){
   if (this->getConnectorType() == "Oracle"){
     string sqlStmt;
-    if ( pType == "Blob" )  
+    if ( pType == "Blob" )
       sqlStmt = "update " + pTable + " set " + pField + " = empty_blob() where " + pWhere;
-    if ( pType == "Clob" )  
+    else if ( pType == "Clob" )
       sqlStmt = "update " + pTable + " set " + pField + " = empty_clob() where " + pWhere;
 	else {
 	  cout << "Type must be one of <Clob> or <Blob>" << endl;
-	  return (-1);  
+	  return (-1);
 	}
     Statement *stmt = conn->createStatement (sqlStmt);
     try{

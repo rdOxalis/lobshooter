@@ -235,21 +235,24 @@ int main(int argc, char *argv[])
     }
   }
 
+  // Der Rueckgabewert der Transfermethoden wird nach aussen durchgereicht,
+  // damit aufrufende Skripte Fehler ueberhaupt bemerken koennen.
+  int rc = 0;
   // Upload of CharData
   if (strcmp(argv[4],"UC") == 0){
-    CL->UploadClobData();
+    rc = CL->UploadClobData();
   }
   // Download of CharData
   if (strcmp(argv[4],"DC") == 0){
-    CL->DownloadClobData();
+    rc = CL->DownloadClobData();
   }
   // Upload of BinData
   if (strcmp(argv[4],"UB") == 0){
-    BL->UploadBlobData();
+    rc = BL->UploadBlobData();
   }
   // Download of BinData
   if (strcmp(argv[4],"DB") == 0){
-    BL->DownloadBlobData();
+    rc = BL->DownloadBlobData();
   }
-  return 0;
+  return rc;
 }

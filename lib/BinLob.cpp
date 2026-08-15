@@ -87,13 +87,13 @@ int BinLob::DownloadBlobData(void){
           ofFile.close();
           cout << "Getting the Blob - Success" << endl;
         }
-        free(buffer);
+        delete[] buffer;
 
     }
     catch (SQLException e){
       cout << e.getMessage();
       this->WriteLogFile(e.getMessage());
-      free(buffer);
+      delete[] buffer;
       return(-3);
     }
     return(0);
@@ -126,7 +126,9 @@ int BinLob::UploadBlobData(void){
 
     //unsigned int bufsize=sizeof(char);
     //char* buffer = new char[bufsize];
-    unsigned int bufsize=i-2;
+    // i kann 1 sein (leere Datei); ohne Absicherung liefe der unsigned
+    // Ausdruck auf ~4 Mrd. hinaus.
+    unsigned int bufsize = (i > 2) ? (i-2) : 0;
     char* buffer = new char[bufsize];
     ifstream inFile;
     inFile.open((const char*)filename.c_str(),ios_base::binary|ios_base::in);
@@ -156,7 +158,6 @@ int BinLob::UploadBlobData(void){
         strm->writeLastBuffer(buffer,size);
         blob.closeStream(strm);
         inFile.close();
-        delete[] buffer;
         cout << "Populating the Blob - Success" << endl;
       }
       stmt->setAutoCommit(TRUE);
@@ -166,8 +167,10 @@ int BinLob::UploadBlobData(void){
     catch(SQLException e){
       cout <<e.getMessage() << endl;
       this->WriteLogFile(e.getMessage());
+      delete[] buffer;
       return (-3);
     }
+    delete[] buffer;
     return(0);
   }
   return(0);

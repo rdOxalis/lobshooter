@@ -104,6 +104,7 @@ int CharLob::DownloadClobData(void){
       delete[] buffer;
       return(-3);
     }
+    delete[] buffer;
     return(0);
   }
   return(0);
@@ -135,7 +136,9 @@ int CharLob::UploadClobData(void){
     ifstream inFile;
     inFile.open((const char*)filename.c_str(),ios_base::in);
     // abcdefg[eof][aktuelle pos]  , daher -2
-    unsigned int bufsize=i-2;//sizeof(char);
+    // i kann 1 sein (leere Datei); ohne Absicherung liefe der unsigned
+    // Ausdruck auf ~4 Mrd. hinaus.
+    unsigned int bufsize = (i > 2) ? (i-2) : 0;
     char* buffer = new char[bufsize];
         
     unsigned int size;
@@ -161,13 +164,12 @@ int CharLob::UploadClobData(void){
         strm->writeLastBuffer(buffer,size);
         clob.closeStream(strm);
         inFile.close();
-        delete[] buffer;
       }
       cout << "Populating the Clob - Success" << endl;
       stmt->setAutoCommit(TRUE);
       stmt->executeUpdate();
       stmt->closeResultSet(rset);
-      
+
     }
     catch(SQLException e){
       cout <<e.getMessage();
@@ -175,6 +177,7 @@ int CharLob::UploadClobData(void){
       delete[] buffer;
       return (-3);
     }
+    delete[] buffer;
     return(0);
   }
   return(0);
