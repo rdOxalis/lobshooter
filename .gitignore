@@ -1,0 +1,6 @@
+# In-source CMake build artifacts (this project is built with `cmake .`)
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+install_manifest.txt
