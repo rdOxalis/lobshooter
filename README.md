@@ -157,9 +157,12 @@ lives in the header comment of `lobshooter/main.cpp`.
 
 Written in 2004 under the name **oraload**. That name turned out to belong to
 another tool already, so the project became **LobShooter** — but the binary kept
-the old name for years. Since 2026 everything is called `lobshooter`. The
-SourceForge links still found in the sources point at the original `oraload`
-project and are left untouched on purpose.
+the old name for years. Since 2026 everything is called `lobshooter`.
+
+The original project still lives at
+[sourceforge.net/projects/oraload](http://sourceforge.net/projects/oraload/)
+under its first name, which is also why a SourceForge reference remains in
+`tests/TestSuite.cpp`.
 
 ## License
 
