@@ -58,8 +58,8 @@ class  BinLob:public Lob
   BinLob (char* user , char* pass , char* db);
   /*!  Constructor
    * 
-   * @param connection     name of a formerly built connection
-   * @param connection     the corresponding environment
+   * @param p_connection   name of a formerly built connection
+   * @param p_env          the corresponding environment
   */
   BinLob (oracle::occi::Connection* p_connection, oracle::occi::Environment* p_env);
   /*!  Def Destructor
