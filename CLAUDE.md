@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-LobShooter for Oracle (`lobshooter`) — a C++ command-line tool plus shared library (`libloadutil`) that uploads and downloads LOBs (CLOB/BLOB) to and from an Oracle database via OCCI. LGPL 2.1, originally hosted on SourceForge SVN (the checked-in `html/` Doxygen output still contains SVN conflict leftovers: `*.mine`, `*.r34`, `*.r35`).
+LobShooter for Oracle (`lobshooter`) — a C++ command-line tool plus shared library (`libloadutil`) that uploads and downloads LOBs (CLOB/BLOB) to and from an Oracle database via OCCI. LGPL 2.1, originally hosted on SourceForge SVN under the name `oraload`.
 
 ## Build
 
@@ -88,4 +88,4 @@ Similarly, the multi-file option (`-ml`, `filename,file2,...`) survives as an un
 doxygen Doxyfile     # INPUT=., RECURSIVE=YES, writes into html/
 ```
 
-`html/` is checked in (184 files). Regenerating it produces a very large diff, so only do so when explicitly asked.
+`html/` is generated output, gitignored, and rebuilt by `.github/workflows/docs.yml` on every push to master, which publishes it to GitHub Pages. Never commit it.
