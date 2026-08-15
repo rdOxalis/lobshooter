@@ -78,11 +78,11 @@ These are CppUnit **integration** tests, not unit tests: they connect as `hr/hr@
 
 `lobwizard/` builds a Qt4 GUI (`LobWizard`, generated from `LobWizard.ui`) that inherits `BasicDML` alongside `QWizard`. It is not in the root `CMakeLists.txt`, and its entry point in `lobshooter/main.cpp` (the `-gui` branch and the `LobWizard.h` include) is commented out. Treat it as unmaintained; don't assume it compiles against current Qt.
 
-Similarly, the multi-file option (`-ml`, `filename,file2,...`) is documented in the Doxygen mainpage and there is an unused `int multifile` in `main.cpp`, but no implementation exists.
+Similarly, the multi-file option (`-ml`, `filename,file2,...`) survives as an unused `int multifile` in `main.cpp` and in the usage text's `filename[,file2,...]`, but no implementation exists.
 
 ## Documentation
 
-The Doxygen `\mainpage` — usage, options, install instructions, examples — lives in the header comment block of `lobshooter/main.cpp`. Update it there when CLI behavior changes, then regenerate:
+`README.md` *is* the Doxygen start page (`USE_MDFILE_AS_MAINPAGE`), so usage, options and examples are documented there and nowhere else — the old `\mainpage` block in `main.cpp` is gone. Update the README when CLI behavior changes, then regenerate:
 
 ```bash
 doxygen Doxyfile     # INPUT=., RECURSIVE=YES, writes into html/

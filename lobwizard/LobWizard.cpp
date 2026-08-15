@@ -1,5 +1,5 @@
 //    <lobshooter - loads and gets lobs (Large Objects) into and out of an Oracle Database> 
-//    Copyright (C) <2004-2009> <Ralf Duenkelmann>
+//    Copyright (C) <2004-2026> <Ralf Duenkelmann>
 //
 //    This library is free software; you can redistribute it and/or modify it under the terms of the 
 //    GNU Lesser General Public License as published by the Free Software Foundation; 

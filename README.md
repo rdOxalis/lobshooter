@@ -150,8 +150,9 @@ cmake/        FindOracle.cmake
 html/         generated Doxygen documentation
 ```
 
-Regenerate the API documentation with `doxygen Doxyfile`; the manual page text
-lives in the header comment of `lobshooter/main.cpp`.
+Regenerate the API documentation with `doxygen Doxyfile`. This file doubles as
+the documentation's start page, so keep usage changes here rather than in the
+sources.
 
 ## History
 
@@ -167,4 +168,4 @@ under its first name, which is also why a SourceForge reference remains in
 ## License
 
 GNU Lesser General Public License, version 2.1 or later.
-Copyright © 2004–2007 Ralf Duenkelmann. See `LICENSE`.
+Copyright © 2004–2026 Ralf Duenkelmann. See `LICENSE`.
